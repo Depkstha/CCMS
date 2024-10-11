@@ -1,0 +1,11 @@
+{
+    "name": "CourseFinder",
+    "alias": "coursefinder",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CourseFinder\\Providers\\CourseFinderServiceProvider"
+    ],
+    "files": []
+}

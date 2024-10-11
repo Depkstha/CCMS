@@ -1,0 +1,11 @@
+{
+    "name": "CCMS",
+    "alias": "ccms",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CCMS\\Providers\\CCMSServiceProvider"
+    ],
+    "files": []
+}
