@@ -1,47 +1,63 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-form.input-label for="email" :value="__('Email')" />
-            <x-form.text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-form.input-error :messages="$errors->get('email')" class="mt-2" />
+@extends('layouts.guest')
+@section('content')
+    <div class="login-aside text-center d-none d-sm-flex flex-column flex-row-auto">
+        <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
+            <div class="text-center mb-4 pt-5">
+                <a href="{{ url('/') }}"><img src="{{ asset(setting('logo')) }}" class="dark-login" alt=""></a>
+                <a href="{{ url('/') }}"><img src="{{ asset(setting('logo')) }}" class="light-login" alt=""></a>
+            </div>
+            <h3 class="mb-2">Welcome back!</h3>
+            <p>Your Gateway to Expert Consultancy Solutions <br> Reach Out to Us for Tailored Website Design and Strategic
+                Consulting</p>
         </div>
+        <div class="aside-image" style="background-image:url({{ asset('assets/images/login.png') }});"></div>
+    </div>
+    <div
+        class="container flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
+        <div class="d-flex justify-content-center h-100 align-items-center">
+            <div class="authincation-content style-2">
+                <div class="row no-gutters">
+                    <div class="col-xl-12">
+                        <div class="auth-form">
+                            <div class="text-center d-block d-sm-none mb-4 pt-5">
+                                <a href="{{ url('/') }}"><img src="{{ asset(setting('logo')) }}"
+                                        class="dark-login" alt=""></a>
+                                <a href="{{ url('/') }}"><img src="{{ asset(setting('logo')) }}"
+                                        class="light-login" alt=""></a>
+                            </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-form.input-label for="password" :value="__('Password')" />
-
-            <x-form.text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-form.input-error :messages="$errors->get('password')" class="mt-2" />
+                            <h4 class="text-center mb-4">Sign in your account</h4>
+                            {{ html()->form('POST', route('login'))->open() }}
+                            <div class="mb-3">
+                                {{ html()->label('Email')->for('email')->class('mb-1 form-label') }}
+                                {{ html()->email('email')->class('form-control')->placeholder('Enter Email') }}
+                            </div>
+                            <div class="mb-3">
+                                {{ html()->label('Password')->for('ic-password')->class('mb-1 form-label') }}
+                                <div class="position-relative">
+                                    {{ html()->password('password')->class('form-control')->placeholder('Enter Password') }}
+                                    <span class="show-pass eye">
+                                        <i class="fa fa-eye-slash"></i>
+                                        <i class="fa fa-eye"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                                <div class="mb-3">
+                                    <div class="form-check custom-checkbox ms-1">
+                                        {{ html()->checkbox('remember')->class('form-check-input') }}
+                                        {{ html()->label('Remember me')->class('form-check-label')->for('remember') }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
+                            </div>
+                            {{ html()->form()->close() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-form.primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-form.primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+@endsection

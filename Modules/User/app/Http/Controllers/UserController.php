@@ -3,16 +3,30 @@
 namespace Modules\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules;
+use Modules\User\Services\UserService;
 
 class UserController extends Controller
 {
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('user::index');
+        $users = $this->userService->getAllUsers();
+        return view('user::index', [
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -20,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user::create');
+        //
     }
 
     /**
@@ -28,7 +42,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->mergeIfMissing([
+            'is_admin' => 0,
+        ]);
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'is_admin' => ['required', 'boolean'],
+        ]);
+
+        $user = $this->userService->storeUser($validated);
+
+        return redirect()->back()->with('success', "User for {$user->name} has been created");
     }
 
     /**
@@ -44,7 +71,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('user::edit');
+        $user = $this->userService->getUserById($id);
+        return view('user::edit', [
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -52,7 +82,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore(auth()->user()->id),
+            ],
+            'password' => ['nullable', Rules\Password::defaults()],
+        ]);
+
+        $user = $this->userService->updateUser($id, $validated);
+
+        return redirect()->back()->with('success', "User for {$user->name} has been updated.");
     }
 
     /**
@@ -60,6 +105,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = $this->userService->deleteUser($id);
+        return redirect()->back()->with('success', "User for {$user->name} has been deleted.");
     }
 }

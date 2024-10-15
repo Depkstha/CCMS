@@ -3,7 +3,7 @@
     <div class="page-head">
         <div class="row">
             <div class="col-12 mb-sm-4 mb-3">
-                <h3 class="mb-0">Welcome to your dashboard, Hanuman</h3>
+                <h3 class="mb-0">Welcome to your dashboard, {{ auth()->user()->name }}</h3>
                 <p class="mb-0">"Success is not final, failure is not fatal: It is the courage to continue that counts." — Winston Churchill</p>
             </div>
         </div>

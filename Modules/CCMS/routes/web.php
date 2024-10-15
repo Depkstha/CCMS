@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\CCMS\Http\Controllers\CCMSController;
+use Modules\CCMS\Http\Controllers\PageController;
+use Modules\CCMS\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,8 +13,9 @@ use Modules\CCMS\Http\Controllers\CCMSController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::group([], function () {
-    Route::resource('ccms', CCMSController::class)->names('ccms');
+    Route::resource('page', PageController::class)->names('page');
+    Route::resource('setting', SettingController::class)->names('setting')->only(['index', 'store']);
 });

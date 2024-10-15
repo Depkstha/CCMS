@@ -36,7 +36,8 @@
                                     <li>
                                         <div class="timeline-panel">
                                             <div class="media me-2">
-                                                <img alt="image" width="50" src="images/avatar/1.jpg">
+                                                <img alt="image" width="50"
+                                                    src="{{ asset('assets/images/avatar/avatar.png') }}">
                                             </div>
                                             <div class="media-body">
                                                 <h6 class="mb-1">Dr sultads Send you Photo</h6>
@@ -108,7 +109,7 @@
 
                     <li class="nav-item dropdown header-profile">
                         <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-                            <img src="images/user.jpg" width="20" alt>
+                            <img src="{{ asset('assets/images/avatar/avatar.png') }}" width="20" alt>
                             <div class="header-info ms-3">
                                 <span class="fs-14 font-w600 mb-0">{{ auth()->user()->name }}</span>
                             </div>
@@ -124,7 +125,7 @@
                             <div class="card-body p-0">
                                 <div class="d-flex profile-media justify-content-between align-items-center">
                                     <div class="d-flex">
-                                        <img src="images/profile-k.png">
+                                        <img src="{{ asset('assets/images/avatar/avatar.png') }}">
                                         <div class="ms-3">
                                             <h4 class="mb-0">{{ auth()->user()->name }}</h4>
                                             <p>{{ auth()->user()->email }}</p>
@@ -163,7 +164,8 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <a href="javascript:void(0)"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                 <div class="icon-box-lg">
                                                     <svg width="40" height="40" viewBox="0 0 40 40"
                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -177,9 +179,10 @@
                                                     <p>Logout</p>
                                                 </div>
                                             </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                class="d-none">
                                                 @csrf
-                                              </form>
+                                            </form>
                                         </li>
                                     </ul>
                                 </div>

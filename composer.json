@@ -13,6 +13,7 @@
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "nwidart/laravel-modules": "^11.1",
+        "spatie/laravel-html": "^3.11",
         "unisharp/laravel-filemanager": "^2.9",
         "yajra/laravel-datatables-oracle": "^11.0"
     },
@@ -30,7 +31,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/Helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

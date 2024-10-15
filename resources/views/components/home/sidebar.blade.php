@@ -12,28 +12,18 @@
                     <span class="nav-text">CMS</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="content.html">Content</a></li>
-                    <li><a href="content-add.html">Add Content</a></li>
-                    <li><a href="menu.html">Menus</a></li>
-                    <li><a href="email-template.html">Email Template</a></li>
-                    <li><a href="add-email.html">Add Email</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="add-blog.html">Add Blog</a></li>
-                    <li><a href="blog-category.html">Blog Category</a></li>
+                    <li><a href="{{ route('page.index') }}">Page</a></li>
+                    <li><a href="content.html">Menus</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
-                    <i class="flaticon flaticon-user-1"></i>
-                    <span class="nav-text">Profile</span>
+                    <i class="flaticon flaticon-user"></i>
+                    <span class="nav-text">Setting</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="profile/overview.html">Overview</a></li>
-                    <li><a href="profile/projects.html">Projects</a></li>
-                    <li><a href="profile/projects-details.html">Projects Details</a></li>
-                    <li><a href="profile/campaigns.html">Campaigns</a></li>
-                    <li><a href="profile/documents.html">Documents</a></li>
-                    <li><a href="profile/followers.html">Followers</a></li>
-                    <li><a href="profile/activity.html">Activity</a></li>
+                    <li><a href="{{ route('user.index') }}">User</a></li>
+                    <li><a href="{{ route('setting.index') }}">Website Setting</a></li>
+                   
                 </ul>
             </li>
             <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
