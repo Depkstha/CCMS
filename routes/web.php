@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('<h1>Welcome to your Website Frontend!</h1>');
 });
 
+Route::post('/file-upload', function () {
+    return 'hello';
+})->name('file.upload');
+
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
@@ -21,4 +25,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

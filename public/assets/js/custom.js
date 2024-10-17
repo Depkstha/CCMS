@@ -976,3 +976,15 @@ jQuery(window).on("resize", function () {
     }, false)
   })
 })();
+
+
+
+
+document.querySelectorAll(".ckeditor-classic").forEach((editor) => {
+    CKEDITOR.replace(editor, {
+        filebrowserBrowseUrl: `${app_url}/laravel-filemanager?type=Files`,
+        filebrowserUploadUrl: "{{ route('file.upload', ['_token' => csrf_token()]) }}",
+        filebrowserUploadMethod: "form",
+    });
+});
+

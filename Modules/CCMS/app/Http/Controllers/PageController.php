@@ -12,7 +12,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view('ccms::index');
+        return view('ccms::page.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('ccms::create');
+        return view('ccms::page.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        return view('ccms::show');
+        return view('ccms::page.show');
     }
 
     /**
@@ -44,7 +44,7 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        return view('ccms::edit');
+        return view('ccms::page.edit');
     }
 
     /**

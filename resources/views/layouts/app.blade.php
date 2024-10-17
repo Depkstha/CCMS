@@ -7,30 +7,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Bibhuti Solutions">
-    <link rel="canonical" href="">
+    <link rel="canonical" href="{{ setting('website_url') }}">
     <meta name="keywords"
         content="WorldNIC admin dashboard, Bootstrap admin template, HTML admin panel, admin dashboard design, Bootstrap admin HTML, management dashboard, data visualization template, WorldNIC Bootstrap, admin panel features, web admin template, Bootstrap admin dashboard">
     <meta name="description"
         content="WorldNIC is a versatile admin dashboard Bootstrap HTML template. It offers a clean design and robust features for effective management and
 			data visualization.">
     <!-- OG:META TAGS -->
-    <meta property="og:title" content="CCMS - Bibhuti Consultancy Admin Dashboard">
+    <meta property="og:title" content="CCMS - Consultancy Admin Dashboard">
     <meta property="og:description"
         content="WorldNIC is a versatile admin dashboard Bootstrap HTML template. It offers a clean design and robust features for effective management and data visualization.">
-    <meta property="og:image" content="social-image.html">
+    <meta property="og:image" content="{{ setting('logo') }}">
     <meta name="format-detection" content="telephone=no">
     <!-- TWITTER:META TAGS -->
     <meta name="twitter:title" content="CCMS - Bibhuti Consultancy Admin Dashboard">
     <meta name="twitter:description"
         content="WorldNIC is a versatile admin dashboard Bootstrap HTML template. It offers a clean design and robust features for effective management and data visualization">
-    <meta name="twitter:image" content="social-image.html">
+    <meta name="twitter:image" content="{{ setting('logo') }}">
     <meta name="twitter:card" content="summary_large_image">
 
     <!-- MOBILE SPECIFIC -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="shortcut icon" href="{{ setting('favicon') }}">
     <link href="{{ asset('assets/vendor/swiper/css/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet">
@@ -59,7 +59,7 @@
         <script>
             const app_url = "{{ config('app.url') }}";
         </script>
-        
+
         <!-- Required vendors -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -68,6 +68,11 @@
         <!-- Chart piety plugin files -->
         <script src="{{ asset('assets/vendor/peity/jquery.peity.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+
+        <!-- Ckeditor -->
+        <script src="{{ asset('assets/vendor/ckeditor4/ckeditor.js') }}"></script>
+        <script src="{{ asset('assets/vendor/ckeditor4/adapters/jquery.js') }}"></script>
+
         <!-- Dashboard 1 -->
         <script src="{{ asset('assets/vendor/swiper/js/swiper-bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/custom.js') }}"></script>

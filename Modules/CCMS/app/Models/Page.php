@@ -13,10 +13,30 @@ class Page extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'template',
+        'type',
+        'banner',
+        'image',
+        'images',
+        'published_at',
 
-    // protected static function newFactory(): PageFactory
-    // {
-    //     // return PageFactory::new();
-    // }
+        'sidebar_title',
+        'sidebar_content',
+        'sidebar_image',
+
+        'button_text',
+        'button_link',
+        'redirect',
+
+        'meta_title',
+        'meta_keywords',
+        'meta_description',
+        'status',
+        'order'
+    ];
+
 }
