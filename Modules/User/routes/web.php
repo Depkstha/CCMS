@@ -14,6 +14,6 @@ use Modules\User\Http\Controllers\UserController;
 |
 */
 
-Route::group([], function () {
+Route::group(['middleware' => ['web','auth']], function () {
     Route::resource('user', UserController::class)->names('user');
 });

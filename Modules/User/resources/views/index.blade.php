@@ -39,19 +39,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $index => $user) 
+                                @foreach ($users as $index => $user)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->is_admin ? 'Yes' : 'No' }}</td>
+                                        <td>{{ $user->is_admin == 1 ? 'Yes' : 'No' }}</td>
                                         <td>{{ $user->created_at }}</td>
                                         <td>
                                             <div class="d-flex">
                                                 <a href="{{ route('user.edit', $user->id) }}"
                                                     class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                         class="fa fa-pencil"></i></a>
-                                                <a href="javascript:void(0);" data-link="{{ route('user.destroy', $user->id) }}" class="btn btn-danger shadow btn-xs sharp remove-item-btn"><i class="fa fa-trash"></i></a>
+                                                <a href="javascript:void(0);"
+                                                    data-link="{{ route('user.destroy', $user->id) }}"
+                                                    class="btn btn-danger shadow btn-xs sharp remove-item-btn"><i
+                                                        class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>

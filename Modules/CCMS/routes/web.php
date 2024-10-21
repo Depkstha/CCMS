@@ -15,7 +15,7 @@ use Modules\CCMS\Http\Controllers\SettingController;
 |
  */
 
-Route::group([], function () {
+Route::group(['middleware' => ['web','auth']], function () {
     Route::resource('page', PageController::class)->names('page');
     Route::resource('setting', SettingController::class)->names('setting')->only(['index', 'store']);
 });

@@ -42,15 +42,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->mergeIfMissing([
-            'is_admin' => 0,
-        ]);
-
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'is_admin' => ['required', 'boolean'],
+            'is_admin' => ['required'],
         ]);
 
         $user = $this->userService->storeUser($validated);
@@ -90,7 +86,7 @@ class UserController extends Controller
                 'lowercase',
                 'email',
                 'max:255',
-                Rule::unique(User::class)->ignore(auth()->user()->id),
+                Rule::unique(User::class)->ignore($id),
             ],
             'password' => ['nullable', Rules\Password::defaults()],
         ]);

@@ -13,6 +13,7 @@
                 <a href="{{ route('page.index') }}" class="btn btn-sm btn-primary mb-4">Page List</a>
                 <button type="button" class="btn btn-sm btn-primary mb-4 customize-btn">Customize Form</button>
             </div>
+            {{ html()->form('POST')->route('page.store')->class('needs-validation')->attributes(['novalidate'])->open() }}
             <div class="main-check customize-section">
                 <div class="row">
                     <h6 class="mb-3">Show on screen</h6>
@@ -33,15 +34,22 @@
 
                     <div class="col-xl-2 col-lg-3 col-sm-4">
                         <div class="form-check mb-3">
-                            {{ html()->checkbox('section[]', false, 'featured-image-section')->class('form-check-input')->id('featuredImageCheck') }}
-                            {{ html()->label('Featured Image')->class('form-check-label mb-0 text-nowrap')->for('featuredImageCheck') }}
+                            {{ html()->checkbox('section[]', false, 'template-section')->class('form-check-input')->id('templateCheck') }}
+                            {{ html()->label('Template')->class('form-check-label mb-0 text-nowrap')->for('templateCheck') }}
                         </div>
                     </div>
 
                     <div class="col-xl-2 col-lg-3 col-sm-4">
                         <div class="form-check mb-3">
-                            {{ html()->checkbox('section[]', false, 'page-type-section')->class('form-check-input')->id('pageTypeCheck') }}
-                            {{ html()->label('Page Type')->class('form-check-label mb-0 text-nowrap')->for('pageTypeCheck') }}
+                            {{ html()->checkbox('section[]', false, 'meta-section')->class('form-check-input')->id('metaCheck') }}
+                            {{ html()->label('Meta')->class('form-check-label mb-0 text-nowrap')->for('metaCheck') }}
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-3 col-sm-4">
+                        <div class="form-check mb-3">
+                            {{ html()->checkbox('section[]', false, 'featured-image-section')->class('form-check-input')->id('featuredImageCheck') }}
+                            {{ html()->label('Featured Image')->class('form-check-label mb-0 text-nowrap')->for('featuredImageCheck') }}
                         </div>
                     </div>
 
@@ -53,20 +61,6 @@
                             </label>
                         </div>
                     </div> --}}
-
-                    <div class="col-xl-2 col-lg-3 col-sm-4">
-                        <div class="form-check mb-3">
-                            {{ html()->checkbox('section[]', false, 'seo-section')->class('form-check-input')->id('seoCheck') }}
-                            {{ html()->label('Featured Image')->class('form-check-label mb-0 text-nowrap')->for('seoCheck') }}
-                        </div>
-                    </div>
-
-                    <div class="col-xl-2 col-lg-3 col-sm-4">
-                        <div class="form-check mb-3">
-                            {{ html()->checkbox('section[]', false, 'seo-section')->class('form-check-input')->id('seoCheck') }}
-                            {{ html()->label('Featured Image')->class('form-check-label mb-0 text-nowrap')->for('seoCheck') }}
-                        </div>
-                    </div>
 
                     <div class="col-xl-2 col-lg-3 col-sm-4">
                         <div class="form-check mb-3">
@@ -94,7 +88,7 @@
 
                     <div class="filter cm-content-box box-primary slug-section">
                         <div class="content-title SlideToolHeader">
-                            <div class="cpa"> Slug
+                            <div class="cpa"> URL Generator
                             </div>
                             <div class="tools">
                                 <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
@@ -102,51 +96,59 @@
                         </div>
                         <div class="cm-content-body">
                             <div class="card-body">
-                                {{ html()->label('Slug')->class('form-label')->for('slug') }}
-                                {{ html()->text('slug')->class('form-control') }}
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        {{ html()->label('Parent')->class('form-label')->for('parent_slug') }}
+                                        {{ html()->text('parent_slug')->class('form-control') }}
+                                    </div>
+                                    <div class="col-lg-7">
+                                        {{ html()->label('Slug')->class('form-label')->for('slug') }}
+                                        {{ html()->text('slug')->class('form-control') }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     {{-- <div class="filter cm-content-box box-primary">
-                        <div class="content-title SlideToolHeader">
-                            <div class="cpa">
-                                Custom Fields
-                            </div>
-                            <div class="tools">
-                                <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
-                            </div>
-                        </div>
-                        <div class="cm-content-body form excerpt">
-                            <div class="card-body">
-                                <h6 class="mb-4 font-w500">Add New Custom Field:</h6>
-                                <div class="row">
-                                    <div class="col-xl-6 col-sm-6">
-                                        <form>
-                                            <div class="mb-3">
-                                                <label class="form-label">Title</label>
-                                                <input type="text" class="form-control" placeholder="Title">
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-xl-6 col-sm-6">
-                                        <label class="form-label">Value</label>
-                                        <textarea class="form-control" rows="2"></textarea>
-                                    </div>
+                            <div class="content-title SlideToolHeader">
+                                <div class="cpa">
+                                    Custom Fields
                                 </div>
-                                <button type="button" class="btn btn-primary btn-sm mt-3 mt-sm-0">Add Custom
-                                    Field</button>
-                                <p class="mt-3 mb-0">Custom fields can be used to extra metadata to a post
-                                    that you can use in your theme.</p>
+                                <div class="tools">
+                                    <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
+                                </div>
                             </div>
-                        </div>
-                    </div> --}}
+                            <div class="cm-content-body">
+                                <div class="card-body">
+                                    <h6 class="mb-4 font-w500">Add New Custom Field:</h6>
+                                    <div class="row">
+                                        <div class="col-xl-6 col-sm-6">
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Title</label>
+                                                    <input type="text" class="form-control" placeholder="Title">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-xl-6 col-sm-6">
+                                            <label class="form-label">Value</label>
+                                            <textarea class="form-control" rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary btn-sm mt-3 mt-sm-0">Add Custom
+                                        Field</button>
+                                    <p class="mt-3 mb-0">Custom fields can be used to extra metadata to a post
+                                        that you can use in your theme.</p>
+                                </div>
+                            </div>
+                        </div> --}}
 
 
 
-                    <div class="filter cm-content-box box-primary">
+                    <div class="filter cm-content-box box-primary meata-section">
                         <div class="content-title SlideToolHeader">
-                            <div class="cpa"> Seo
+                            <div class="cpa"> Meta
                             </div>
                             <div class="tools">
                                 <a href="javascript:void(0);" class="expand handle"><i class="fal fa-angle-down"></i></a>
@@ -154,10 +156,11 @@
                         </div>
                         <div class="cm-content-body">
                             <div class="card-body">
-                                {{ html()->label('Meta Title')->class('form-label')->for('meta_title') }}
-                                {{ html()->text('meta_title')->class('form-control mb-3')->placeholder('Meta Title') }}
-
                                 <div class="row">
+                                    <div class="col-xl-12 col-sm-12">
+                                        {{ html()->label('Meta Title')->class('form-label')->for('meta_title') }}
+                                        {{ html()->text('meta_title')->class('form-control mb-3')->placeholder('Meta Title') }}
+                                    </div>
                                     <div class="col-xl-12 col-sm-12">
                                         {{ html()->label('Meta Keywords')->class('form-label')->for('meta_keywords') }}
                                         {{ html()->textarea('meta_keywords')->class('form-control mb-3')->placeholder('Meta Keywords')->rows(3) }}
@@ -185,7 +188,7 @@
                                             class="fal fa-angle-down"></i></a>
                                 </div>
                             </div>
-                            <div class="cm-content-body publish-content form excerpt">
+                            <div class="cm-content-body publish-content">
                                 <div class="card-body py-3">
                                     <ul class="list-style-1 block">
                                         <li>
@@ -237,7 +240,43 @@
                                     </ul>
                                 </div>
                                 <div class="card-footer border-top text-end py-3 ">
-                                    <a href="javascript:void(0);" class="btn btn-primary btn-sm">Publish</a>
+                                    <button type="submit" class="btn btn-primary btn-sm">Publish</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter cm-content-box box-primary">
+                            <div class="content-title SlideToolHeader">
+                                <div class="cpa">
+                                    Page Type
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:void(0);" class="expand handle"><i
+                                            class="fal fa-angle-down"></i></a>
+                                </div>
+                            </div>
+                            <div class="cm-content-body publish-content">
+                                <div class="card-body">
+                                    {{ html()->label('Page Type')->class('form-label')->for('page_type') }}
+                                    {{ html()->select('page_type', config('constants.page_type_options'))->class('form-control default-select h-auto wide') }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter cm-content-box box-primary template-section">
+                            <div class="content-title SlideToolHeader">
+                                <div class="cpa">
+                                    Template
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:void(0);" class="expand handle"><i
+                                            class="fal fa-angle-down"></i></a>
+                                </div>
+                            </div>
+                            <div class="cm-content-body publish-content">
+                                <div class="card-body">
+                                    <label class="form-label d-block">Template</label>
+                                    {{ html()->select('template', getPageTemplateOptions())->class('form-select select2')->placeholder('Select') }}
                                 </div>
                             </div>
                         </div>
@@ -255,9 +294,9 @@
                             <div class="cm-content-body publish-content">
                                 <div class="card-body">
                                     <label class="form-label d-block">Parent Page</label>
-                                    
-                                    <select class="form-control default-select h-auto wide"
-                                        aria-label="Default select example">
+
+                                    <select class="form-control select2 h-auto wide" aria-label="Default select example"
+                                        multiple>
                                         <option selected>(No Parent)</option>
                                         <option value="1">Privacy Policy</option>
                                         <option value="2">Contact Us</option>
@@ -272,23 +311,6 @@
                             </div>
                         </div>
 
-                        <div class="filter cm-content-box box-primary page-type-section">
-                            <div class="content-title SlideToolHeader">
-                                <div class="cpa">
-                                    Page Type
-                                </div>
-                                <div class="tools">
-                                    <a href="javascript:void(0);" class="expand handle"><i
-                                            class="fal fa-angle-down"></i></a>
-                                </div>
-                            </div>
-                            <div class="cm-content-body publish-content form excerpt">
-                                <div class="card-body">
-                                    {{ html()->label('Page Type')->class('form-label')->for('page_type') }}
-                                    {{ html()->select('page_type', config('constants.page_type_options'))->class('form-control default-select h-auto wide') }}
-                                </div>
-                            </div>
-                        </div>
                         <div class="filter cm-content-box box-primary feature-image-section">
                             <div class="content-title SlideToolHeader">
                                 <div class="cpa">
@@ -299,16 +321,35 @@
                                             class="fal fa-angle-down"></i></a>
                                 </div>
                             </div>
-                            <div class="cm-content-body publish-content form excerpt">
+                            <div class="cm-content-body publish-content">
                                 <div class="card-body">
                                     <x-image-input :data="$editable ? setting('image') : null" id="image" name="image" :editable="$editable"
                                         :multiple=false />
                                 </div>
                             </div>
                         </div>
+
+                        <div class="filter cm-content-box box-primary media-galler-section">
+                            <div class="content-title SlideToolHeader">
+                                <div class="cpa">
+                                    Media Gallery
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:void(0);" class="expand handle"><i
+                                            class="fal fa-angle-down"></i></a>
+                                </div>
+                            </div>
+                            <div class="cm-content-body publish-content">
+                                <div class="card-body">
+                                    <x-image-input :editable="$editable" id="images" name="images" :data="$editable ? setting('images') : null"
+                                        :multiple="true" label="Select Images" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            {{ html()->form()->close() }}
         </div>
     </div>
 @endsection

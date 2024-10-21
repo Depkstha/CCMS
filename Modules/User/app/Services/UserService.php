@@ -31,6 +31,7 @@ class UserService
                 'name' => $userData['name'],
                 'email' => $userData['email'],
                 'password' => Hash::make($userData['password']),
+                'is_admin' => $userData['is_admin'] ?? false,
             ]);
 
             return $user;

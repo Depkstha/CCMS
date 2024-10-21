@@ -22,3 +22,17 @@ if (!function_exists('uploadImage')) {
         return $filePath;
     }
 }
+
+function getPageTemplateOptions()
+{
+    $client = config('app.client');
+    $pageTemplateOptions = collect(File::files(resource_path("views/client/{$client}/pages")))
+        ->mapWithKeys(function ($file) {
+            $template = Str::replace('.blade.php', '', $file->getFilename());
+            return [
+                $template => $template,
+            ];
+        });
+
+    return $pageTemplateOptions->all();
+}

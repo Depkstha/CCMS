@@ -1,8 +1,8 @@
 @props([
     'id' => 'lfm-image',
     'name' => 'logo',
-    'label' => 'Select image',
-    'multiple' => 'false',
+    'label' => 'Select Image',
+    'multiple' => 'true',
     'data' => null,
     'editable' => false,
 ])
@@ -12,12 +12,14 @@
     </div>
 
     <input id="{{ $id }}" type="text" name="{{ $name }}" value="{{ $data }}"
-        class="form-control bg-muted" readonly />
+        class="form-control" readonly />
 
-    <div class="input-group mt-1">
+    <div class="input-group mt-3">
         <span class="input-group-btn">
-            <a href="javascript:void(0)" id="{{ $id }}-input" data-input="{{ $id }}" class="link-primary link-offset-2">
-                <i class="fa-regular fa-images"></i><span class="ms-1">{{ $label }}</span></a>
+            <a href="javascript:void(0)" id="{{ $id }}-input" data-input="{{ $id }}"
+                class="link-primary link-opacity-75-hover link-offset-2">
+                <i class="fa-regular fa-images me-1"></i> {{ $label }}
+            </a>
         </span>
     </div>
 
@@ -42,7 +44,7 @@
             $(document).on('change', `#${eventListener}`, function() {
                 const value = $(this).val();
 
-                imgArray = (isMultiple === 'true') ? value.split(',') : [value.split(',').pop()];
+                imgArray = (isMultiple == true) ? value.split(',') : [value.split(',').pop()];
                 let imageUrl = imgArray.join(',');
                 $(`#${eventListener}`).val(imageUrl);
                 $(`.${eventListener}-upload__img-wrap`).empty();

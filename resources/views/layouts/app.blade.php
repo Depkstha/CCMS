@@ -34,6 +34,7 @@
     <link href="{{ asset('assets/vendor/swiper/css/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/select2/css/select2.min.css') }}" rel="stylesheet">
     <!-- STYLE CSS -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
@@ -65,6 +66,7 @@
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
         <!-- Chart piety plugin files -->
         <script src="{{ asset('assets/vendor/peity/jquery.peity.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>

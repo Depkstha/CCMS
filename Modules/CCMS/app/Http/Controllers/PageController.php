@@ -20,7 +20,9 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('ccms::page.create');
+        return view('ccms::page.create', [
+            'editable' => false,
+        ]);
     }
 
     /**
@@ -28,7 +30,7 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

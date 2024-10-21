@@ -988,3 +988,7 @@ document.querySelectorAll(".ckeditor-classic").forEach((editor) => {
     });
 });
 
+$('.select2').select2({
+  tags: true
+});
+
