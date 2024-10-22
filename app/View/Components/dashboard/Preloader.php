@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\home;
+namespace App\View\Components\dashboard;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -21,6 +21,6 @@ class Preloader extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.home.preloader');
+        return view('components.dashboard.preloader');
     }
 }

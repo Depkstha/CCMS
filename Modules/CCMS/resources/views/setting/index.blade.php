@@ -1,14 +1,118 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row page-titles">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">CMS</a></li>
-            <li class="breadcrumb-item active"><a href="javascript:void(0)">Edit Setting</a></li>
-        </ol>
-    </div>
-
+    <x-dashboard.breadcumb title="Setting" />
     <div class="row">
+
+        <div class="col-12">
+            <h5 class="mb-3">Custom Tabs Bordered</h5>
+            <div class="card">
+                <div class="card-body">
+                    <p class="text-muted">Use <code>nav-tabs-custom</code> class to create custom tabs with borders.</p>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs nav-tabs-custom nav-success nav-justified mb-3" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#home1" role="tab">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#profile1" role="tab">
+                                Profile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#messages1" role="tab">
+                                Messages
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#settings1" role="tab">
+                                Settings
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content text-muted">
+                        <div class="tab-pane active" id="home1" role="tabpanel">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="ri-checkbox-multiple-blank-fill text-success"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-2">
+                                    Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold
+                                    out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack
+                                    portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred
+                                    vinyl keffiyeh DIY salvia PBR.
+                                    <div class="mt-2">
+                                        <a href="javascript:void(0);"
+                                            class="btn btn-sm btn-soft-primary material-shadow-none">Read More <i
+                                                class="ri-arrow-right-line ms-1 align-middle"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="profile1" role="tabpanel">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="ri-checkbox-multiple-blank-fill text-success"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-2">
+                                    When, while the lovely valley teems with vapour around me, and the meridian sun strikes
+                                    the upper surface of the impenetrable foliage of my trees, and but a few stray gleams
+                                    steal into the inner sanctuary, I throw myself down among the tall grass by the
+                                    trickling stream; and, as I lie close to the earth, a thousand unknown.
+                                    <div class="mt-2">
+                                        <a href="javascript:void(0);"
+                                            class="btn btn-sm btn-soft-primary material-shadow-none">Read More <i
+                                                class="ri-arrow-right-line ms-1 align-middle"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="messages1" role="tabpanel">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="ri-checkbox-multiple-blank-fill text-success"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-2">
+                                    Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's
+                                    organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify
+                                    pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy
+                                    hoodie helvetica. DIY synth PBR banksy irony.
+                                    <div class="mt-2">
+                                        <a href="javascript:void(0);"
+                                            class="btn btn-sm btn-soft-primary material-shadow-none">Read More <i
+                                                class="ri-arrow-right-line ms-1 align-middle"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="settings1" role="tabpanel">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="ri-checkbox-multiple-blank-fill text-success"></i>
+                                </div>
+                                <div class="flex-grow-1 ms-2">
+                                    when darkness overspreads my eyes, and heaven and earth seem to dwell in my soul and
+                                    absorb its power, like the form of a beloved mistress, then I often think with longing,
+                                    Oh, would I could describe these conceptions, could impress upon paper all that is
+                                    living so full and warm within me, that it might be the.
+                                    <div class="mt-2">
+                                        <a href="javascript:void(0);"
+                                            class="btn btn-sm btn-soft-primary material-shadow-none">Read More <i
+                                                class="ri-arrow-right-line ms-1 align-middle"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end card-body -->
+            </div><!-- end card -->
+        </div>
+        <!--end col-->
+
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
@@ -19,7 +123,8 @@
                     <div class="custom-tab-1">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link fs-16 active" data-bs-toggle="tab" href="#general-tab">General Content</a>
+                                <a class="nav-link fs-16 active" data-bs-toggle="tab" href="#general-tab">General
+                                    Content</a>
                             </li>
 
                             <li class="nav-item">
@@ -56,8 +161,8 @@
                                     <div class="row gy-3">
                                         <div class="col-lg-4">
                                             {{ html()->label('Logo')->class('form-label')->for('logo') }}
-                                            <x-image-input :data="$editable ? setting('logo') : null" id="logo" name="logo" :editable="$editable"
-                                                :multiple=false />
+                                            <x-image-input :data="$editable ? setting('logo') : null" id="logo" name="logo"
+                                                :editable="$editable" :multiple=false />
                                         </div>
 
                                         <div class="col-lg-4">
@@ -68,8 +173,8 @@
 
                                         <div class="col-lg-4">
                                             {{ html()->label('Fav Icon')->class('form-label')->for('favicon') }}
-                                            <x-image-input :data="$editable ? setting('favicon') : null" id="favicon" name="favicon" :editable="$editable"
-                                                :mulitple=false />
+                                            <x-image-input :data="$editable ? setting('favicon') : null" id="favicon" name="favicon"
+                                                :editable="$editable" :mulitple=false />
                                         </div>
 
                                         <x-form-buttons :editable="$editable" label="Update"
@@ -83,8 +188,8 @@
                                     <div class="row gy-3">
                                         <div class="col-lg-4">
                                             {{ html()->label('Banner')->class('form-label')->for('banner') }}
-                                            <x-image-input :data="$editable ? setting('banner') : null" id="banner" name="banner" :editable="$editable"
-                                                :multiple=false />
+                                            <x-image-input :data="$editable ? setting('banner') : null" id="banner" name="banner"
+                                                :editable="$editable" :multiple=false />
                                         </div>
 
                                         <x-form-buttons :editable="$editable" label="Update"
