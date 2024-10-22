@@ -13,6 +13,8 @@
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "nwidart/laravel-modules": "^11.1",
+        "php-flasher/flasher-laravel": "^2.1",
+        "php-flasher/flasher-toastr-laravel": "^2.1",
         "spatie/laravel-html": "^3.11",
         "unisharp/laravel-filemanager": "^2.9",
         "yajra/laravel-datatables-oracle": "^11.0"

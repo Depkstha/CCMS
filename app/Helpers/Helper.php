@@ -1,4 +1,5 @@
 <?php
+use Carbon\Carbon;
 use Modules\CCMS\Models\Setting;
 
 if (!function_exists('setting')) {
@@ -35,4 +36,45 @@ function getPageTemplateOptions()
         });
 
     return $pageTemplateOptions->all();
+}
+
+if (!function_exists('getFormatted')) {
+    function getFormatted($dateTime = null, $date = null, $time = null, $format = null)
+    {
+        $data = null;
+
+        switch (true) {
+            case !is_null($dateTime):
+                $data = $dateTime;
+                $format ??= 'd M, Y h:i A';
+                break;
+
+            case !is_null($date) && !is_null($time):
+
+                $data = "{$date} {$time}";
+                $format ??= 'd M, Y h:i A';
+                break;
+
+            case !is_null($date):
+
+                $data = $date;
+                $format ??= 'd M, Y';
+                break;
+
+            case !is_null($time):
+                $data = $time;
+                $format ??= 'h:i A';
+                break;
+
+            default:
+                return null;
+        }
+
+        try {
+            $formatted = Carbon::parse($data)->format($format);
+            return $formatted;
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
 }

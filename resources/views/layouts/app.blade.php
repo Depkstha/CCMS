@@ -1,131 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"
+    data-sidebar-image="none" data-preloader="disable">
 
 <head>
-    <!-- PAGE TITLE HERE -->
-    <title>CCMS - Consultancy Admin Dashboard</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="author" content="Bibhuti Solutions">
-    <link rel="canonical" href="{{ setting('website_url') }}">
-    <meta name="keywords"
-        content="WorldNIC admin dashboard, Bootstrap admin template, HTML admin panel, admin dashboard design, Bootstrap admin HTML, management dashboard, data visualization template, WorldNIC Bootstrap, admin panel features, web admin template, Bootstrap admin dashboard">
-    <meta name="description"
-        content="WorldNIC is a versatile admin dashboard Bootstrap HTML template. It offers a clean design and robust features for effective management and
-			data visualization.">
-    <!-- OG:META TAGS -->
-    <meta property="og:title" content="CCMS - Consultancy Admin Dashboard">
-    <meta property="og:description"
-        content="WorldNIC is a versatile admin dashboard Bootstrap HTML template. It offers a clean design and robust features for effective management and data visualization.">
-    <meta property="og:image" content="{{ setting('logo') }}">
-    <meta name="format-detection" content="telephone=no">
-    <!-- TWITTER:META TAGS -->
-    <meta name="twitter:title" content="CCMS - Bibhuti Consultancy Admin Dashboard">
-    <meta name="twitter:description"
-        content="WorldNIC is a versatile admin dashboard Bootstrap HTML template. It offers a clean design and robust features for effective management and data visualization">
-    <meta name="twitter:image" content="{{ setting('logo') }}">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta charset="utf-8" />
+    <title>Consultancy CCMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <!-- Layout config Js -->
+    <script src="{{ asset('assets/js/layout.js') }}"></script>
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <!-- MOBILE SPECIFIC -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @stack('css')
 
-    <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" href="{{ setting('favicon') }}">
-    <link href="{{ asset('assets/vendor/swiper/css/swiper-bundle.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/bootstrap-select/css/bootstrap-select.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/select2/css/select2.min.css') }}" rel="stylesheet">
-    <!-- STYLE CSS -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
 </head>
 
 <body>
-    <x-home.preloader />
-    <div id="main-wrapper" class="show">
 
-        <x-home.application-logo />
-        <x-home.navbar />
-        <x-home.sidebar />
+    <div id="layout-wrapper">
+        <x-dashboard.navbar />
+        <x-dashboard.remove-notification-modal />
+        <x-dashboard.sidebar />
 
-        <div class="content-body">
-            <div class="container-fluid">
+        <div class="vertical-overlay"></div>
+        <div class="main-content">
+            <div class="page-content">
 
                 @yield('content')
 
             </div>
+            <x-dashboard.footer />
         </div>
-        <x-home.footer />
+    </div>
 
-        <script>
-            const app_url = "{{ config('app.url') }}";
-        </script>
+    <x-dashboard.preloader />
 
-        <!-- Required vendors -->
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootstrap-select/js/bootstrap-select.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
-        <!-- Chart piety plugin files -->
-        <script src="{{ asset('assets/vendor/peity/jquery.peity.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <!-- JAVASCRIPT -->
+    <script src="{{ asset('assets/libs/jquery/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/form-validation.init.js') }}"></script>
 
-        <!-- Ckeditor -->
-        <script src="{{ asset('assets/vendor/ckeditor4/ckeditor.js') }}"></script>
-        <script src="{{ asset('assets/vendor/ckeditor4/adapters/jquery.js') }}"></script>
+    @stack('js')
 
-        <!-- Dashboard 1 -->
-        <script src="{{ asset('assets/vendor/swiper/js/swiper-bundle.min.js') }}"></script>
-        <script src="{{ asset('assets/js/custom.js') }}"></script>
-        <script src="{{ asset('assets/js/ic-sidenav-init.js') }}"></script>
-        <script src="{{ asset('assets/js/demo.js') }}"></script>
-        <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script>
-
-        @stack('js')
-        <!-- Initialize Swiper -->
-        <script>
-            var swiper = new Swiper(".mySwiper", {
-                slidesPerView: 1.5,
-                spaceBetween: 15,
-                navigation: {
-                    nextEl: "",
-                    prevEl: "",
-                },
-                breakpoints: {
-                    360: {
-                        slidesPerView: 1.5,
-                        spaceBetween: 20,
-                    },
-                    768: {
-                        slidesPerView: 2.5,
-                        spaceBetween: 40,
-                    },
-                    1200: {
-                        slidesPerView: 1.5,
-                        spaceBetween: 20,
-                    },
-                },
-            });
-            var swiper = new Swiper(".mySwiper1", {
-                slidesPerView: 4,
-                spaceBetween: 15,
-                navigation: {
-                    nextEl: "",
-                    prevEl: "",
-                },
-                breakpoints: {
-                    360: {
-                        slidesPerView: 1.5,
-                        spaceBetween: 20,
-                    },
-                    768: {
-                        slidesPerView: 2.5,
-                        spaceBetween: 20,
-                    },
-                },
-            });
-        </script>
+    <!-- App js -->
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
 </body>
 
 </html>

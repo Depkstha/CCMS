@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class UserService
 {
 
-    public function getAllUsers(array $filters = [], int $perPage = 10)
+    public function getAllUsers(array $filters = [])
     {
         $query = User::query();
 
@@ -48,11 +48,15 @@ class UserService
         $user = $this->getUserById($id);
 
         return DB::transaction(function () use ($user, $userData) {
+            $user->name = $userData['name'];
+            $user->email = $userData['email'];
+            $user->is_admin = !empty($userData['is_admin']);
+
             if (isset($userData['password'])) {
-                $userData['password'] = Hash::make($userData['password']);
+                $user->password = Hash::make($userData['password']);
             }
 
-            $user->update($userData);
+            $user->save();
             return $user;
         });
     }

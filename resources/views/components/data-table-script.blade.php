@@ -1,16 +1,19 @@
-@props(['route', 'columns'])
+@props(['route', 'columns', 'reorder'])
 
-<table id="datatable" class="display table-sm table-bordered table">
-    <thead class="table-light">
-        <tr class="text-center">
+<table class="display table table-bordered dt-responsive ajax-datatable table-sm" style="width:100%">
+    <thead class="text-white" style="background-color: var(--vz-primary)">
+        <tr>
             @foreach ($columns as $index => $column)
-                <th class="tb-col"><span class="overline-title">{{ $column['title'] }}</th>
+                <th>{{ $column['title'] }}</th>
             @endforeach
         </tr>
     </thead>
-    <tbody>
+    <tbody id="table-body">
+
     </tbody>
 </table>
+
+
 
 @push('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
@@ -33,14 +36,17 @@
                 }
             });
 
-            let table = $('#datatable').DataTable({
+            let table = $('.ajax-datatable').DataTable({
                 processing: true,
                 reordering: true,
                 serverSide: true,
-                // dom: "Bfrtip",
-                // buttons: ["copy", "csv", "excel", "print"],
+                dom: "Bfrtip",
+                buttons: ["copy", "csv", "excel", "print"],
                 ajax: "{{ $route }}",
                 columns: @json($columns),
+                rowCallback: function(row, data) {
+                    $(row).attr('data-id', data.id);
+                }
             });
 
             $("#table-body").sortable({
@@ -66,8 +72,8 @@
 
                 $.ajax({
                     type: "POST",
+                    url: "{{ $reorder }}",
                     dataType: "json",
-                    url: "{{ route('menus.reorder') }}",
                     data: {
                         order: order,
                         _token: token
@@ -75,7 +81,7 @@
                     success: function(response) {
                         if (response.status == true) {
                             console.log(response.message);
-                            window.location.reload();
+                            $('.ajax-datatable').DataTable().ajax.reload();
                         } else {
                             console.log(response);
                         }
@@ -83,14 +89,9 @@
                 });
             }
 
-            //   if ($.fn.DataTable.isDataTable('#datatable')) {
-            //     $('#datatable').DataTable().destroy();
-            //   }
-
             $('body').on('click', '.remove-item', function(e) {
                 e.preventDefault();
                 let url = $(this).data('link');
-                let id = $(this).data('id');
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
@@ -107,13 +108,11 @@
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
-                            data: {
-                                id: id
-                            },
                             success: function(response) {
-                                console.log(response.message);
-                                flasher.success(response.message);
-                                $('#datatable').DataTable().ajax.reload();
+                                if (response.ok) {
+                                    flasher.success(response.message);
+                                    $('.ajax-datatable').DataTable().ajax.reload();
+                                }
                             },
                             error: function(xhr, status, error) {
                                 console.error(xhr.responseText);

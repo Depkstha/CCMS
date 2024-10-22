@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Modules\User\Services\UserService;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -21,11 +22,29 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(?int $id = null)
     {
-        $users = $this->userService->getAllUsers();
-        return view('user::index', [
-            'users' => $users,
+        $isEditing = !is_null($id);
+        $title = $isEditing ? 'Edit User' : 'Add User';
+        $user = $isEditing ? $this->userService->getUserById($id) : null;
+
+        if (request()->ajax()) {
+            $model = user::query()->orderBy('order');
+
+            return DataTables::eloquent($model)
+                ->addIndexColumn()
+                ->setRowClass('tableRow')
+                ->editColumn('is_admin', function (User $user) {
+                    return $user->is_admin ? 'Yes' : 'No';
+                })
+                ->addColumn('action', 'user::user.datatable.action')
+                ->rawColumns(['action'])
+                ->toJson();
+        }
+
+        return view('user::user.index', [
+            'user' => $user,
+            'title' => $title,
         ]);
     }
 
@@ -42,16 +61,46 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $isEditing = $request->has('id');
+
+        if ($isEditing) {
+            $validated = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => [
+                    'required',
+                    'string',
+                    'lowercase',
+                    'email',
+                    'max:255',
+                    Rule::unique(User::class)->ignore($request->id),
+                ],
+                'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+                'is_admin' => ['nullable'],
+            ]);
+
+            $user = $this->userService->updateUser($request->id, $validated);
+            flash()->success("User for {$user->name} has been updated.");
+            return to_route('user.index');
+        }
+
+        $maxOrder = User::max('order');
+        $order = $maxOrder ? ++$maxOrder : 1;
+
+        $request->mergeIfMissing([
+            'order' => $order
+        ]);
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'is_admin' => ['required'],
+            'is_admin' => ['nullable'],
+            'order' => ['integer'],
         ]);
 
         $user = $this->userService->storeUser($validated);
-
-        return redirect()->back()->with('success', "User for {$user->name} has been created");
+        flash()->success("User for {$user->name} has been created.");
+        return to_route('user.index');
     }
 
     /**
@@ -59,7 +108,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('user::show');
+        //
     }
 
     /**
@@ -68,7 +117,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->userService->getUserById($id);
-        return view('user::edit', [
+        return view('user::user.edit', [
             'user' => $user,
         ]);
     }
@@ -78,22 +127,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
-                Rule::unique(User::class)->ignore($id),
-            ],
-            'password' => ['nullable', Rules\Password::defaults()],
-        ]);
-
-        $user = $this->userService->updateUser($id, $validated);
-
-        return redirect()->back()->with('success', "User for {$user->name} has been updated.");
+        //
     }
 
     /**
@@ -102,6 +136,20 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = $this->userService->deleteUser($id);
-        return redirect()->back()->with('success', "User for {$user->name} has been deleted.");
+        return response()->json(['status' => 200, 'message' => "User for {$user->name} has been deleted."], 200);
+    }
+
+    public function reorder(Request $request)
+    {
+        $users = $this->userService->getAllUsers();
+
+        foreach ($users as $user) {
+            foreach ($request->order as $order) {
+                if ($order['id'] == $user->id) {
+                    $user->update(['order' => $order['position']]);
+                }
+            }
+        }
+        return response(['status' => true, 'message' => 'Reordered successfully'], 200);
     }
 }
