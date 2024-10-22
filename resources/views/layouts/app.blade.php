@@ -48,6 +48,9 @@
     <x-dashboard.preloader />
 
     <!-- JAVASCRIPT -->
+    <script>
+        const app_url = "{{ config('app.url') }}";
+    </script>
     <script src="{{ asset('assets/libs/jquery/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>

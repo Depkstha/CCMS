@@ -18,7 +18,7 @@
         <span class="input-group-btn">
             <a href="javascript:void(0)" id="{{ $id }}-input" data-input="{{ $id }}"
                 class="link-primary link-opacity-75-hover link-offset-2">
-                <i class="fa-regular fa-images me-1"></i> {{ $label }}
+                <i class="ri-image-add-line me-1"></i> {{ $label }}
             </a>
         </span>
     </div>
