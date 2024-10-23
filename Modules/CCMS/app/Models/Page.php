@@ -29,7 +29,7 @@ class Page extends Model
         'sidebar_image',
 
         'button_text',
-        'button_link',
+        'button_text',
         'redirect',
 
         'meta_title',

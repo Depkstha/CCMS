@@ -14,7 +14,7 @@
     <input id="{{ $id }}" type="text" name="{{ $name }}" value="{{ $data }}"
         class="form-control" readonly />
 
-    <div class="input-group mt-3">
+    <div class="input-group mt-1">
         <span class="input-group-btn">
             <a href="javascript:void(0)" id="{{ $id }}-input" data-input="{{ $id }}"
                 class="link-primary link-opacity-75-hover link-offset-2">

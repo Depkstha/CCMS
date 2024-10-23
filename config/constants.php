@@ -11,4 +11,9 @@ return [
         'page' => 'Page',
         'widget' => 'Widget',
     ],
+
+    'redirect_options' => [
+        '_self' => 'Self',
+        '_blank' => 'New Tab',
+    ],
 ];

@@ -34,11 +34,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-6">
                                         {{ html()->label('Parent(Optional)')->class('form-label')->for('parent_slug') }}
                                         {{ html()->text('parent_slug')->class('form-control') }}
                                     </div>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-6">
                                         {{ html()->label('Slug')->class('form-label')->for('slug') }}
                                         {{ html()->span('*')->class('text-danger') }}
                                         {{ html()->text('slug')->class('form-control')->placeholder('Page Slug')->required() }}
@@ -143,6 +143,7 @@
                                 </h6>
                             </div>
                             <div class="card-body">
+                                {{ html}}
                                 <label class="form-label d-block">Parent Page</label>
                                 <select class="form-select">
                                     <option value="1">Privacy Policy</option>
@@ -164,7 +165,14 @@
                                 </h6>
                             </div>
                             <div class="card-body">
-                                <x-image-input :data="$editable ? setting('image') : null" id="image" name="image" :editable="$editable"
+                                <div class="mb-3">
+                                    {{ html()->label('Featured')->class('form-label')->for('image') }}
+                                    <x-image-input :data="$editable ? setting('image') : null" id="image" name="image" :editable="$editable"
+                                        :multiple=false />
+                                </div>
+
+                                {{ html()->label('Banner')->class('form-label')->for('banner') }}
+                                <x-image-input :data="$editable ? setting('banner') : null" id="banner" name="banner" :editable="$editable"
                                     :multiple=false />
                             </div>
                         </div>
@@ -176,7 +184,59 @@
                                 </h6>
                             </div>
                             <div class="card-body">
-                                <x-image-input :editable="$editable" id="images" name="images" :data="$editable ? setting('images') : null" :multiple="true" label="Select Images" />
+                                <x-image-input :editable="$editable" id="images" name="images" :data="$editable ? setting('images') : null"
+                                    :multiple="true" label="Select Images" />
+                            </div>
+                        </div>
+
+                        <div class="card sidebar-section">
+                            <div class="card-header d-flex jusitfy-content-between align-items-center">
+                                <h6 class="card-title mb-0 fs-14">Sidebar</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row gy-3">
+                                    <div class="col-lg-12">
+                                        {{ html()->label('Title')->class('form-label')->for('sidebar_title') }}
+                                        {{ html()->text('sidebar_title')->class('form-control') }}
+                                    </div>
+                                    <div class="col-lg-12">
+                                        {{ html()->label('Content')->class('form-label')->for('sidebar_content') }}
+                                        {{ html()->span('*')->class('text-danger') }}
+                                        {{ html()->text('sidebar_content')->class('form-control')->placeholder('Short Content (optional)')->required() }}
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        {{ html()->label('Image')->class('form-label')->for('sidebar_content') }}
+                                        {{ html()->span('*')->class('text-danger') }}
+                                        <x-image-input :data="$editable ? setting('sidebar_image') : null" id="sidebar_image" name="sidebar_image"
+                                            :editable="$editable" :multiple=false />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card button-section">
+                            <div class="card-header d-flex jusitfy-content-between align-items-center">
+                                <h6 class="card-title mb-0 fs-14">Button</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row gy-3">
+                                    <div class="col-lg-12">
+                                        {{ html()->label('Text')->class('form-label')->for('button_text') }}
+                                        {{ html()->text('button_text')->class('form-control') }}
+                                    </div>
+                                    <div class="col-lg-12">
+                                        {{ html()->label('Link')->class('form-label')->for('button_text') }}
+                                        {{ html()->span('*')->class('text-danger') }}
+                                        {{ html()->text('button_text')->class('form-control')->placeholder('Button Link')->required() }}
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        {{ html()->label('Target')->class('form-label')->for('redirect') }}
+                                        {{ html()->span('*')->class('text-danger') }}
+                                        {{ html()->select('redirect', config('constants.redirect'))->class('form-select')->required() }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
