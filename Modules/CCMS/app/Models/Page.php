@@ -16,7 +16,7 @@ class Page extends Model
     protected $fillable = [
         'title',
         'slug',
-        'content',
+        'section',
         'template',
         'type',
         'banner',
@@ -38,5 +38,14 @@ class Page extends Model
         'status',
         'order'
     ];
+
+
+    protected function casts(): array
+    {
+        return [
+            'section' => 'array',
+            'images' => 'array',
+        ];
+    }
 
 }

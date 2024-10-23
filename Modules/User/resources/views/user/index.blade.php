@@ -4,10 +4,6 @@
     <x-dashboard.breadcumb :title="$title" />
 
     <div class="container-fluid">
-        @if (session('success'))
-            <x-flash-message type="success" :message="session('success')" />
-        @endif
-
         @if ($errors->any())
             <x-flash-message type="danger" :messages="$errors->all()" />
         @endif

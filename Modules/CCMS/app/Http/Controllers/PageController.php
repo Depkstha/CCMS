@@ -4,6 +4,8 @@ namespace Modules\CCMS\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\CCMS\Models\Page;
+use Yajra\DataTables\Facades\DataTables;
 
 class PageController extends Controller
 {
@@ -12,7 +14,27 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view('ccms::page.index');
+        if (request()->ajax()) {
+            $model = Page::query()->orderBy('order');
+
+            return DataTables::eloquent($model)
+                ->addIndexColumn()
+                ->setRowClass('tableRow')
+                ->editColumn('type', '{!! config("constants.page_type_options")[$type] !!}')
+                ->editColumn('date', '{!! getFormatted(date:$date) !!}')
+                ->editColumn('status', function (Page $page) {
+                    $status = $page->status ? 'Published' : 'Draft';
+                    $color = $page->status ? 'text-success' : 'text-danger';
+                    return "<p class='{$color}'>{$status}</p>";
+                })
+                ->addColumn('action', 'ccms::page.datatable.action')
+                ->rawColumns(['status', 'action'])
+                ->toJson();
+        }
+
+        return view('ccms::page.index', [
+            'title' => 'Page List',
+        ]);
     }
 
     /**
@@ -20,9 +42,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('ccms::page.create', [
-            'editable' => false,
-        ]);
+        //
     }
 
     /**
@@ -30,7 +50,23 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $maxOrder = Page::max('order');
+        $order = $maxOrder ? ++$maxOrder : 1;
+
+        $request->mergeIfMissing([
+            'order' => $order,
+        ]);
+
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string'],
+            'order' => ['integer'],
+            'section' => ['nullable', 'array'],
+        ]);
+
+        $page = Page::create($validated);
+        flash()->success("Page for {$page->title} has been created.");
+        return to_route('page.index');
     }
 
     /**
@@ -46,7 +82,12 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        return view('ccms::page.edit');
+        $page = Page::findOrFail($id);
+        return view('ccms::page.edit', [
+            'editable' => true,
+            'page' => $page,
+            'title' => 'Update Page Content',
+        ]);
     }
 
     /**

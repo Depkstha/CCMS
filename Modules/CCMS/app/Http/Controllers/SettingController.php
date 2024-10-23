@@ -16,6 +16,7 @@ class SettingController extends Controller
     {
         return view('ccms::setting.index', [
             'editable' => true,
+            'title' => 'Edit Setting',
         ]);
     }
 

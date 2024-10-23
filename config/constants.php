@@ -3,12 +3,12 @@
 return [
 
     'page_status_options' => [
-        '1' => 'Published',
         '0' => 'Draft',
+        '1' => 'Published',
     ],
 
     'page_type_options' => [
         'page' => 'Page',
-        '0' => 'Widget',
+        'widget' => 'Widget',
     ],
 ];

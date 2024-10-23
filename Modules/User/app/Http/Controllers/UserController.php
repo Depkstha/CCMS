@@ -25,7 +25,6 @@ class UserController extends Controller
     public function index(?int $id = null)
     {
         $isEditing = !is_null($id);
-        $title = $isEditing ? 'Edit User' : 'Add User';
         $user = $isEditing ? $this->userService->getUserById($id) : null;
 
         if (request()->ajax()) {
@@ -44,7 +43,7 @@ class UserController extends Controller
 
         return view('user::user.index', [
             'user' => $user,
-            'title' => $title,
+            'title' => $isEditing ? 'Edit User' : 'Add User',
         ]);
     }
 

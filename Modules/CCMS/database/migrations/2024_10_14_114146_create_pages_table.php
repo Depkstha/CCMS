@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
+            
             $table->text('title');
-            $table->text('slug');
-            $table->longText('content');
+            $table->text('slug')->nullable();
+            $table->json('section')->nullable();
             $table->string('banner')->nullable();
             $table->string('image')->nullable();
-            $table->longText('images')->nullable();
+            $table->json('images')->nullable();
 
             $table->string('template')->nullable();
-            $table->boolean('type')->default(1);
+            $table->string('type')->nullable();
 
             $table->text('meta_title')->nullable();
             $table->longText('meta_description')->nullable();
@@ -36,10 +37,11 @@ return new class extends Migration
             $table->string('button_target')->nullable();
 
             $table->timestamp('date')->nullable();
-            $table->integer('status')->default(1);
+            $table->integer('status')->default(0);
 
             $table->integer('createdby')->unsigned()->nullable();
             $table->integer('updatedby')->unsigned()->nullable();
+            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

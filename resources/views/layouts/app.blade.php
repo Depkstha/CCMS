@@ -62,6 +62,10 @@
 
     @stack('js')
 
+    <!-- Ckeditor js -->
+    <script src="{{ asset('assets/libs/ckeditor4/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/libs/ckeditor4/adapters/jquery.js') }}"></script>
+
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>

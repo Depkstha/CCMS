@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-dashboard.breadcumb title="Setting" />
+    <x-dashboard.breadcumb :title="$title" />
     <div class="container-fluid">
         <div class="row">
 
@@ -53,7 +53,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#other-tab" role="tab"
+                                <a class="nav-link" data-bs-toggle="tab" href="#recaptcha-tab" role="tab"
                                     aria-selected="true">
                                     Recaptcha
                                 </a>
@@ -199,12 +199,12 @@
 
                             <div class="tab-pane" id="recaptcha-tab" role="tabpanel">
                                 <div class="row d-flex flex-column gy-3">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         {{ html()->label('Recaptcha Site Key')->class('form-label')->for('recaptcha_site_key') }}
                                         {{ html()->text('recaptcha_site_key')->class('form-control')->value(setting('recaptcha_site_key'))->placeholder('Enter Recaptcha Site Key') }}
                                     </div>
 
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         {{ html()->label('Recaptcha Secret Key')->class('form-label')->for('recaptcha_secret_key') }}
                                         {{ html()->text('recaptcha_secret_key')->class('form-control')->value(setting('recaptcha_secret_key'))->placeholder('Enter Recaptcha Secret Key') }}
                                     </div>
