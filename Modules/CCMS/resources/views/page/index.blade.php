@@ -4,6 +4,10 @@
     <x-dashboard.breadcumb :title="$title" />
 
     <div class="container-fluid">
+        @if ($errors->any())
+            <x-flash-message type="danger" :messages="$errors->all()" />
+        @endif
+        
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">

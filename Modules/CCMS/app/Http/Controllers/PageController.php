@@ -58,10 +58,12 @@ class PageController extends Controller
         ]);
 
         $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
+            'title' => ['required', 'string', 'max:255', 'unique:pages,title'],
             'type' => ['required', 'string'],
             'order' => ['integer'],
             'section' => ['nullable', 'array'],
+        ],[
+            'page.unique' => 'Page already exists!'
         ]);
 
         $page = Page::create($validated);
@@ -83,9 +85,16 @@ class PageController extends Controller
     public function edit($id)
     {
         $page = Page::findOrFail($id);
+
+        $pageOptions = Page::where([
+            ['type', '=', 'page'],
+            ['id', '!=', $page->id]
+        ])->pluck('title', 'id');
+
         return view('ccms::page.edit', [
             'editable' => true,
             'page' => $page,
+            'pageOptions' => $pageOptions,
             'title' => 'Update Page Content',
         ]);
     }
@@ -95,7 +104,29 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255', 'unique:pages,title,' . $id],
+            'type' => ['required', 'string'],
+            'order' => ['integer'],
+            'section' => ['nullable', 'array'],
+        ]);
+
+        $page = Page::findOrFail($id);
+        $page->update($validated);
+        flash()->success("Page for {$page->title} has been created.");
+        return to_route('page.index');
+    }
+
+
+    public function updateContent(Request $request, $id)
+    {
+        $validated = $request->validate([
+        ]);
+
+        $page = Page::findOrFail($id);
+        $page->update($validated);
+        flash()->success("Content for {$page->title} has been updated.");
+        return redirect()->back();
     }
 
     /**
