@@ -45,5 +45,6 @@
             </div>
         </div>
     </div>
-    @include('ccms::page.add-page-form')
+    @include('ccms::page.modal.create')
+    @include('ccms::page.modal.edit')
 @endsection

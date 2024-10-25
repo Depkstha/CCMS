@@ -46,8 +46,12 @@
                 columns: @json($columns),
                 rowCallback: function(row, data) {
                     $(row).attr('data-id', data.id);
+                },
+                initComplete: function() {
+                    $('[data-bs-toggle="tooltip"]').tooltip();
                 }
             });
+
 
             $("#table-body").sortable({
                 items: "tr",

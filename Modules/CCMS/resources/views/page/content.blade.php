@@ -242,7 +242,7 @@
                                         <div class="col-lg-12">
                                             {{ html()->label('Target')->class('form-label')->for('redirect') }}
                                             {{ html()->span('*')->class('text-danger') }}
-                                            {{ html()->select('redirect', config('constants.redirect'))->class('form-select')->required() }}
+                                            {{ html()->select('redirect', config('constants.redirect_options'))->class('form-select')->required() }}
                                         </div>
                                     </div>
                                 </div>

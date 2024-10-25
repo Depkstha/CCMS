@@ -16,7 +16,7 @@ use Modules\CCMS\Http\Controllers\SettingController;
  */
 
 Route::group(['middleware' => ['web','auth']], function () {
-    Route::put('page/{id}/update-content', [PageController::class, 'updateContent'])->name('page.updateContent');
+    Route::get('page/{id}/update-content', [PageController::class, 'updateContent'])->name('page.updateContent');
     Route::resource('page', PageController::class)->names('page');
     Route::resource('setting', SettingController::class)->names('setting')->only(['index', 'store']);
 });
