@@ -4,6 +4,8 @@ namespace Modules\CCMS\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Modules\CCMS\Models\Page;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -16,12 +18,11 @@ class PageController extends Controller
     {
         if (request()->ajax()) {
             $model = Page::query()->orderBy('order');
-
             return DataTables::eloquent($model)
                 ->addIndexColumn()
                 ->setRowClass('tableRow')
                 ->editColumn('type', '{!! config("constants.page_type_options")[$type] !!}')
-                ->editColumn('date', '{!! getFormatted(date:$date) !!}')
+                ->editColumn('date', '{!! getFormatted(date:$date) ?? "N/A" !!}')
                 ->editColumn('status', function (Page $page) {
                     $status = $page->status ? 'Published' : 'Draft';
                     $color = $page->status ? 'text-success' : 'text-danger';
@@ -50,25 +51,46 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        $maxOrder = Page::max('order');
-        $order = $maxOrder ? ++$maxOrder : 1;
+        $isEditing = $request->has('id');
 
-        $request->mergeIfMissing([
-            'order' => $order,
-        ]);
+        if ($isEditing) {
+            $page = Page::findOrFail($request->id);
+        } else {
+            $maxOrder = Page::max('order');
+            $order = $maxOrder ? ++$maxOrder : 1;
+            $request->merge([
+                'order' => $order,
+                'status' => 0,
+                'slug' => $request->title == 'Homepage' ? '/' : Str::slug($request->title),
+            ]);
+        }
 
         $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255', 'unique:pages,title'],
+            'title' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('pages', 'title')->ignore($isEditing ? $request->id : null),
+            ],
             'type' => ['required', 'string'],
-            'order' => ['integer'],
+            'order' => ['nullable', 'integer'],
             'section' => ['nullable', 'array'],
+            'slug' => ['nullable', 'string'],
+            'status' => ['nullable', 'integer'],
         ], [
-            'page.unique' => 'Page already exists!'
+            'title.unique' => 'Page already exists!',
         ]);
 
-        $page = Page::create($validated);
-        flash()->success("Page for {$page->title} has been created.");
-        return to_route('page.index');
+        if ($isEditing) {
+            $page->update($validated);
+        } else {
+            $page = Page::create($validated);
+        }
+
+        $message = $isEditing ? "Page setting for {$page->title} has been updated." : "Page setting for {$page->title} has been created.";
+        flash()->success($message);
+
+        return redirect()->back();
     }
 
     /**
@@ -96,27 +118,25 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $validated = $request->validate([
-        //     'title' => ['required', 'string', 'max:255', 'unique:pages,title,' . $id],
-        //     'type' => ['required', 'string'],
-        //     'order' => ['integer'],
-        //     'section' => ['nullable', 'array'],
-        // ]);
-
-        // $page = Page::findOrFail($id);
-        // $page->update($validated);
-        // flash()->success("Page for {$page->title} has been created.");
-        // return to_route('page.index');
+        //
     }
 
+    public function editContent($id)
+    {
+        $page = Page::findOrFail($id);
+        return view('ccms::page.content', [
+            'title' => 'Update Page Content',
+            'page' => $page,
+            'editable' => true,
+        ]);
+    }
 
     public function updateContent(Request $request, $id)
     {
         $validated = $request->validate([]);
-
         $page = Page::findOrFail($id);
-        $page->update($validated);
-        flash()->success("Content for {$page->title} has been updated.");
+        $page->update($request->all());
+        flash()->success("Page content for {$page->title} has been updated.");
         return redirect()->back();
     }
 
@@ -125,6 +145,21 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $page = Page::findOrFail($id);
+        $page->delete();
+        return response()->json(['status' => 200, 'message' => "{$page->title} page has been deleted."], 200);
+    }
+
+    public function reorder(Request $request)
+    {
+        $users = Page::all();
+        foreach ($users as $user) {
+            foreach ($request->order as $order) {
+                if ($order['id'] == $user->id) {
+                    $user->update(['order' => $order['position']]);
+                }
+            }
+        }
+        return response(['status' => true, 'message' => 'Reordered successfully'], 200);
     }
 }

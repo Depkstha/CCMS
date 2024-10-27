@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-dashboard.breadcumb :title="$title" />
 
-    <div class="container-fluid">
+<div class="container-fluid">
+        <x-dashboard.breadcumb :title="$title" />
         @if ($errors->any())
             <x-flash-message type="danger" :messages="$errors->all()" />
         @endif

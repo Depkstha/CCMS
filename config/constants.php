@@ -12,6 +12,16 @@ return [
         'widget' => 'Widget',
     ],
 
+    'menu_type_options' => [
+        'single-link' => 'Custom',
+        'pages' => "Page",
+    ],
+
+    'menu_location_options' => [
+        '1' => 'Main Menu',
+        '2' => "Footer Menu",
+    ],
+
     'redirect_options' => [
         '_self' => 'Self',
         '_blank' => 'New Tab',

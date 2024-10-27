@@ -1,5 +1,9 @@
+@php
+    $page->section ??= [];
+@endphp
 @extends('layouts.app')
 @section('content')
+    <x-dashboard.breadcumb :title="$title" />
     <div class="container-fluid">
         @if ($errors->any())
             <x-flash-message type="danger" :messages="$errors->all()" />
@@ -8,7 +12,8 @@
             <div class="col-xl-12">
                 <div>
                     <a href="{{ route('page.index') }}" class="btn btn-sm btn-primary mb-4">Page List</a>
-                    <button type="button" class="btn btn-sm btn-primary mb-4 customize-btn">Customize Page</button>
+                    <a href="javascript:void(0);" data-link="{{ route('page.edit', $page->id) }}" type="button"
+                        class="btn btn-sm btn-primary mb-4 customize-btn edit-item-btn">Customize Page</a>
                 </div>
 
                 {{ html()->modelForm($page, 'PUT')->route('page.updateContent', $page->id)->class('needs-validation')->attributes(['novalidate'])->open() }}
@@ -254,4 +259,6 @@
             </div>
         </div>
     </div>
+
+    @include('ccms::page.modal.edit')
 @endsection

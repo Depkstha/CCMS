@@ -1,19 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-dashboard.breadcumb :title="$title" />
 
-    <div class="container-fluid">
+<div class="container-fluid">
+        <x-dashboard.breadcumb :title="$title" />
         @if ($errors->any())
             <x-flash-message type="danger" :messages="$errors->all()" />
         @endif
-        
+
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5 class="card-title mb-0">Page List</h5>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPageModal"><i class="ri-add-line align-middle"></i> Create</h5>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPageModal"><i
+                                class="ri-add-line align-middle"></i> Create</h5>
                     </div>
                     <div class="card-body">
                         @php
@@ -27,6 +28,7 @@
                                     'sortable' => false,
                                 ],
                                 ['title' => 'Title', 'data' => 'title', 'name' => 'title'],
+                                ['title' => 'Slug', 'data' => 'slug', 'name' => 'slug'],
                                 ['title' => 'Type', 'data' => 'type', 'name' => 'type'],
                                 ['title' => 'Published At', 'data' => 'date', 'name' => 'date'],
                                 ['title' => 'Status', 'data' => 'status', 'name' => 'status'],
@@ -38,8 +40,7 @@
                                 ],
                             ];
                         @endphp
-
-                        <x-data-table-script :route="route('page.index')" :reorder="route('user.reorder')" :columns="$columns" />
+                        <x-data-table-script :route="route('page.index')" :reorder="route('page.reorder')" :columns="$columns" />
                     </div>
                 </div>
             </div>

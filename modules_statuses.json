@@ -1,5 +1,6 @@
 {
     "CCMS": true,
     "User": true,
-    "CourseFinder": true
+    "CourseFinder": true,
+    "Menu": true
 }
