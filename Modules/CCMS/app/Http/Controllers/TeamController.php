@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Modules\CCMS\Models\Slider;
+use Modules\CCMS\Models\Team;
 use Yajra\DataTables\Facades\DataTables;
 
-class SliderController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,30 +17,25 @@ class SliderController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $model = Slider::query()->orderBy('order');
+            $model = Team::query()->orderBy('order');
             return DataTables::eloquent($model)
                 ->addIndexColumn()
                 ->setRowClass('tableRow')
-                ->editColumn('images', function (Slider $slider) {
-                    $html = '<div clas="h-stack">';
-                    foreach ($slider->images as $image) {
-                        $html .= "<img src='{$image}' alt='{$slider->title}' class='rounded avatar-sm material-shadow ms-2 img-thumbnail'>";
-                    }
-                    $html .= "</div>";
-                    return $html;
+                ->editColumn('image', function (Team $team) {
+                    return "<img src='{$team->image}' alt='{$team->title}' class='rounded avatar-sm material-shadow ms-2 img-thumbnail'>";
                 })
-                ->editColumn('status', function (Slider $slider) {
-                    $status = $slider->status ? 'Published' : 'Draft';
-                    $color = $slider->status ? 'text-success' : 'text-danger';
+                ->editColumn('status', function (Team $team) {
+                    $status = $team->status ? 'Published' : 'Draft';
+                    $color = $team->status ? 'text-success' : 'text-danger';
                     return "<p class='{$color}'>{$status}</p>";
                 })
-                ->addColumn('action', 'ccms::slider.datatable.action')
-                ->rawColumns(['status', 'images', 'action'])
+                ->addColumn('action', 'ccms::team.datatable.action')
+                ->rawColumns(['status', 'image', 'action'])
                 ->toJson();
         }
 
-        return view('ccms::slider.index', [
-            'title' => 'Slider List',
+        return view('ccms::team.index', [
+            'title' => 'Team List',
         ]);
     }
 
@@ -49,8 +44,8 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view('ccms::slider.create', [
-            'title' => 'Create Slider',
+        return view('ccms::team.create', [
+            'title' => 'Create Team',
             'editable' => false,
         ]);
     }
@@ -60,7 +55,7 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        $maxOrder = Slider::max('order');
+        $maxOrder = Team::max('order');
         $order = $maxOrder ? ++$maxOrder : 1;
 
         $request->mergeIfMissing([
@@ -74,9 +69,9 @@ class SliderController extends Controller
                 'title' => 'required',
             ]);
 
-            Slider::create($request->all());
-            flash()->success("Slider has been created!");
-            return redirect()->route('slider.index');
+            Team::create($request->all());
+            flash()->success("Team has been created!");
+            return redirect()->route('team.index');
 
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage())->withInput();
@@ -88,7 +83,7 @@ class SliderController extends Controller
      */
     public function show($id)
     {
-        return view('ccms::slider.show');
+        return view('ccms::team.show');
     }
 
     /**
@@ -96,11 +91,11 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        $slider = Slider::findOrFail($id);
-        return view('ccms::slider.edit', [
-            'title' => 'Edit Slider',
+        $team = Team::findOrFail($id);
+        return view('ccms::team.edit', [
+            'title' => 'Edit Team',
             'editable' => true,
-            'slider' => $slider,
+            'team' => $team,
         ]);
     }
 
@@ -120,11 +115,11 @@ class SliderController extends Controller
                 'title' => 'required',
             ]);
 
-            $slider = Slider::findOrFail($id);
-            $slider->update($request->all());
+            $team = Team::findOrFail($id);
+            $team->update($request->all());
 
-            flash()->success("Slider has been updated!");
-            return redirect()->route('slider.index');
+            flash()->success("Team has been updated!");
+            return redirect()->route('team.index');
 
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage())->withInput();
@@ -140,10 +135,10 @@ class SliderController extends Controller
         try {
 
             DB::transaction(function () use ($id) {
-                $slider = Slider::findOrFail($id);
-                $slider->delete();
+                $team = Team::findOrFail($id);
+                $team->delete();
 
-                $higherOrders = Slider::where('id', '>', $id)->get();
+                $higherOrders = Team::where('id', '>', $id)->get();
 
                 if ($higherOrders) {
                     foreach ($higherOrders as $higherOrder) {
@@ -152,7 +147,7 @@ class SliderController extends Controller
                     }
                 }
 
-                return response()->json(['status' => 200, 'message' => 'Slider has been deleted!']);
+                return response()->json(['status' => 200, 'message' => 'Team has been deleted!']);
             });
 
         } catch (\Throwable $th) {
@@ -163,12 +158,12 @@ class SliderController extends Controller
     public function reorder(Request $request)
     {
 
-        $sliders = Slider::all();
+        $teams = Team::all();
 
-        foreach ($sliders as $slider) {
+        foreach ($teams as $team) {
             foreach ($request->order as $order) {
-                if ($order['id'] == $slider->id) {
-                    $slider->update(['order' => $order['position']]);
+                if ($order['id'] == $team->id) {
+                    $team->update(['order' => $order['position']]);
                 }
             }
         }

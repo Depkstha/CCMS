@@ -175,12 +175,12 @@
                                 <div class="card-body">
                                     <div class="mb-3">
                                         {{ html()->label('Featured')->class('form-label')->for('image') }}
-                                        <x-image-input :data="$editable ? setting('image') : null" id="image" name="image" :editable="$editable"
+                                        <x-image-input :data="$editable ? $page->getRawOriginal('image') : null" id="image" name="image" :editable="$editable"
                                             :multiple=false />
                                     </div>
 
                                     {{ html()->label('Banner')->class('form-label')->for('banner') }}
-                                    <x-image-input :data="$editable ? setting('banner') : null" id="banner" name="banner" :editable="$editable"
+                                    <x-image-input :data="$editable ? $page->getRawOriginal('banner') : null" id="banner" name="banner" :editable="$editable"
                                         :multiple=false />
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
                                     </h6>
                                 </div>
                                 <div class="card-body">
-                                    <x-image-input :editable="$editable" id="images" name="images" :data="$editable ? setting('images') : null"
+                                    <x-image-input :editable="$editable" id="images" name="images" :data="$editable ? $page->getRawOriginal('images') : null"
                                         :multiple="true" label="Select Images" />
                                 </div>
                             </div>
@@ -218,7 +218,7 @@
 
                                         <div class="col-lg-12">
                                             {{ html()->label('Image')->class('form-label')->for('sidebar_content') }}
-                                            <x-image-input :data="$editable ? setting('sidebar_image') : null" id="sidebar_image" name="sidebar_image"
+                                            <x-image-input :data="$editable ? $page->getRawOriginal('sidebar_image') : null" id="sidebar_image" name="sidebar_image"
                                                 :editable="$editable" :multiple=false />
                                         </div>
                                     </div>

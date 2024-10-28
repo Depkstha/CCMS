@@ -6,7 +6,7 @@
 
             {{ html()->form('POST')->route('menu.store')->class(['needs-validation'])->attributes(['enctype' => 'multipart/form-data', 'novalidate'])->open() }}
 
-            @include('menu::menu.partials.action')
+            @include('menu::menu.partials._form')
 
             {{ html()->form()->close() }}
 

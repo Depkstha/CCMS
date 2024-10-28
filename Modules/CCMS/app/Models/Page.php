@@ -2,6 +2,7 @@
 
 namespace Modules\CCMS\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Modules\CCMS\Database\Factories\PageFactory;
@@ -29,7 +30,7 @@ class Page extends Model
         'sidebar_image',
 
         'button_text',
-        'button_text',
+        'button_url',
         'redirect',
 
         'meta_title',
@@ -44,8 +45,41 @@ class Page extends Model
     {
         return [
             'section' => 'array',
-            'images' => 'array',
         ];
     }
 
+    protected function images(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if (empty($value)) {
+                    return [];
+                }
+
+                $parts = explode(',', $value);
+                return array_map(fn($part) => asset(trim($part)), $parts);
+            }
+        );
+    }
+
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => asset($value),
+        );
+    }
+
+    protected function banner(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => asset($value),
+        );
+    }
+
+    protected function sidebarImage(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => asset($value),
+        );
+    }
 }

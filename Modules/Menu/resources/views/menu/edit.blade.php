@@ -6,7 +6,7 @@
 
             {{ html()->modelForm($menu, 'PUT')->route('menu.update', $menu->id)->class(['needs-validation'])->attributes(['novalidate'])->open() }}
 
-            @include('menu::menu.partials.action')
+            @include('menu::menu.partials._form')
 
             {{ html()->form()->close() }}
 

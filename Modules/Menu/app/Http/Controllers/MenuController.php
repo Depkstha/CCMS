@@ -76,8 +76,8 @@ class MenuController extends Controller
         $order = $maxOrder ? ++$maxOrder : 1;
 
         $request->mergeIfMissing([
-            'alias' => Str::slug('title'),
-            'parent_id' => $request->parent_id ?? 0,
+            'alias' => Str::slug($request->title),
+            'parent_id' => $request->parent_id,
             'order' => $order,
         ]);
 
@@ -95,7 +95,7 @@ class MenuController extends Controller
             return redirect()->route('menu.index');
 
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', $th->getMessage());
+            return redirect()->back()->with('error', $th->getMessage())->withInput();
         }
 
     }
