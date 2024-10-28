@@ -15,5 +15,5 @@ use Modules\Menu\Http\Controllers\MenuController;
 */
 
 Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('menu', MenuController::class)->names('menu');
+    //
 });

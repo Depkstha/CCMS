@@ -113,7 +113,7 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             success: function(response) {
-                                if (response.ok) {
+                                if (response.status == 200) {
                                     flasher.success(response.message);
                                     $('.ajax-datatable').DataTable().ajax.reload();
                                 }

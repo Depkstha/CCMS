@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5 class="card-title mb-0">Page List</h5>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPageModal"><i
+                        <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#addPageModal" style="background-color: var(--vz-primary)"><i
                                 class="ri-add-line align-middle"></i> Create</h5>
                     </div>
                     <div class="card-body">

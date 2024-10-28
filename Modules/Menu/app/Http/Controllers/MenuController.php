@@ -32,6 +32,18 @@ class MenuController extends Controller
             return DataTables::eloquent($model)
                 ->addIndexColumn()
                 ->setRowClass('tableRow')
+                ->addColumn('parent', function (Menu $menu) {
+                    return $menu->parent?->title ?? '-';
+                })
+                ->addColumn('parameter', function (Menu $menu) {
+                    return $menu->url_parameter;
+                })
+                ->editColumn('type', '{!! config("constants.menu_type_options")[$type] !!}')
+                ->editColumn('status', function (Menu $menu) {
+                    $status = $menu->status ? 'Published' : 'Draft';
+                    $color = $menu->status ? 'text-success' : 'text-danger';
+                    return "<p class='{$color}'>{$status}</p>";
+                })
                 ->addColumn('action', 'menu::menu.datatable.action')
                 ->rawColumns(['status', 'action'])
                 ->toJson();
@@ -61,7 +73,6 @@ class MenuController extends Controller
     {
 
         $maxOrder = Menu::max('order');
-
         $order = $maxOrder ? ++$maxOrder : 1;
 
         $request->mergeIfMissing([
@@ -72,20 +83,16 @@ class MenuController extends Controller
 
         try {
 
-            $validator = Validator::make($request->all(), [
+            $validated = $request->validate([
                 'menu_location_id' => 'required',
                 'title' => 'required',
                 'type' => 'required',
                 'parameter' => 'required',
             ]);
 
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator->errors());
-            }
-
-            $this->menu->create($request->all());
-
-            return redirect()->route('menus.index')->with('success', 'Menu has been created!');
+            $menu = $this->menu->create($validated);
+            flash()->success("Menu for {$menu->title} has been created!");
+            return redirect()->route('menu.index');
 
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
@@ -125,16 +132,12 @@ class MenuController extends Controller
 
         try {
 
-            $validator = Validator::make($request->all(), [
+            $validated = $request->validate([
                 'menu_location_id' => 'required',
                 'title' => 'required',
                 'type' => 'required',
                 'parameter' => 'required',
             ]);
-
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator->errors());
-            }
 
             $this->menu->update($id, $request->except('_method', '_token'));
 
@@ -166,7 +169,7 @@ class MenuController extends Controller
 
             DB::commit();
 
-            return response()->json(['status' => true, 'message' => 'Menu has been deleted!']);
+            return response()->json(['status' => 200, 'message' => 'Menu has been deleted!']);
 
         } catch (\Throwable $th) {
             DB::rollBack();

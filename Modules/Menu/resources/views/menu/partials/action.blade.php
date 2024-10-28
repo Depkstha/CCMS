@@ -4,21 +4,20 @@
         <div class="card">
             <div class="card-body">
                 <div class="row gy-3">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         {{ html()->label('Title')->class('form-label') }}
-                        {{ html()->text('title')->class('form-control')->placeholder('Display Title')->required(true) }}
+                        {{ html()->text('title')->class('form-control')->placeholder('Display Title') }}
                         {{ html()->div('Menu title is required')->class('invalid-feedback') }}
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         {{ html()->label('Icon (Optional)')->class('form-label') }}
                         {{ html()->text('icon_class')->class('form-control')->placeholder('Icon class') }}
                     </div>
 
-
                     <div class="col-md-4">
                         {{ html()->label('Location')->class('form-label') }}
-                        {{ html()->select('menu_location_id', config('constants.menu_location_options'))->class('form-select')->required(true) }}
+                        {{ html()->select('menu_location_id', config('constants.menu_location_options'))->class('form-select select2')->required(true) }}
                     </div>
 
                     <div class="col-md-4">
@@ -28,18 +27,18 @@
 
                     <div class="col-md-4">
                         {{ html()->label('Sub menu of (Empty if Parent Menu)')->class('form-label') }}
-                        {{ html()->select('parent_id', $menuOptions)->class('form-select')->placeholder('Select Parent') }}
+                        {{ html()->select('parent_id', $menuOptions)->class('form-select select2')->placeholder('Select Parent') }}
                     </div>
 
                     <div class="col-md-4 dropdown-row" style="display: none">
                         {{ html()->label('Ref (select Reference)')->class('form-label') }}
-                        {{ html()->select('parameter', [])->id('parameterDropdown')->class('form-select')->placeholder('Select option') }}
+                        {{ html()->select('parameter', [])->id('parameterDropdown')->class('form-select select2')->placeholder('Select option') }}
                         {{ html()->div('Reference is required')->class('invalid-feedback') }}
                     </div>
 
                     <div class="col-md-4 text-row">
-                        {{ html()->label('# or Start from /')->class('form-label') }}
-                        {{ html()->text('parameter')->id('parameterInput')->class('form-control')->required(true) }}
+                        {{ html()->label('#(Fragment) or Start from /(Custom)')->class('form-label') }}
+                        {{ html()->text('parameter')->id('parameterInput')->class('form-control') }}
                         {{ html()->div('Link is required')->class('invalid-feedback') }}
                     </div>
 
@@ -57,7 +56,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        {{ html()->select('status', config('constants.page_status_options'))->class('form-select') }}
+                        {{ html()->select('status', config('constants.page_status_options'))->class('form-select select2') }}
                     </div>
                 </div>
                 <x-form-buttons :editable="$editable" label="Save" href="{{ route('menu.index') }}" />
@@ -73,7 +72,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        {{ html()->select('target', config('constants.redirect_options'))->class('form-select') }}
+                        {{ html()->select('target', config('constants.redirect_options'))->class('form-select select2') }}
                     </div>
                 </div>
             </div>
@@ -88,71 +87,84 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            const editable = '{{ $editable }}';
+            console.log(editable);
+            
+            if (editable == 1) {
+                const selectedValue = "{{ $menu->parameter ?? null }}";
+                $('#menuType').trigger('change', [selectedValue]);
+            }
+        });
 
-            $(document).on('change', '#menuType', function() {
+        $(document).on('change', '#menuType', function(event, selectedValue) {
 
-                const value = $(this).val();
+            const value = $(this).val();
 
-                if (value == 'single-link') {
+            if (value == 'single-link' || value == 'fragment') {
 
-                    $('.dropdown-row').hide();
+                $('.dropdown-row').hide();
 
-                    $('#parameterDropdown').prop({
-                        required: false,
-                    });
+                $('#parameterDropdown').prop({
+                    required: false,
+                });
 
-                    $('.text-row').show();
-                    $('#parameterInput').prop({
-                        required: true,
-                        disabled: false
-                    });
+                $('.text-row').show();
 
-                } else {
+                $('#parameterInput').prop({
+                    required: true,
+                    disabled: false
+                });
 
-                    $('.dropdown-row').show();
-                    $('#parameterDropdown').prop({
-                        required: true,
-                    });
+            } else {
 
-                    $('.text-row').hide();
-                    $('#parameterInput').prop({
-                        required: false,
-                        disabled: true
-                    });
+                $('.dropdown-row').show();
 
-                    $.ajax({
-                            url: '{{ route('menu.getMenuTypeOptions') }}',
-                            type: 'GET',
-                            data: {
-                                tableName: value,
-                            },
-                            dataType: 'json',
-                        })
-                        .done(function(response) {
-                            $('#parameterDropdown').empty();
+                $('#parameterDropdown').prop({
+                    required: true,
+                });
 
-                            $('#parameterDropdown').append($('<option>', {
-                                value: null,
-                                text: 'Select option',
-                                selected: true,
-                                disabled: true
-                            }));
+                $('.text-row').hide();
 
-                            console.log(response.data);
+                $('#parameterInput').prop({
+                    required: false,
+                    disabled: true
+                });
 
-                            $.each(response.data, function(value, text) {
-                                console.log(text);
-                                $('#parameterDropdown').append($('<option>', {
-                                    value: value,
-                                    text: text
-                                }));
+                $.ajax({
+                        url: '{{ route('menu.getMenuTypeOptions') }}',
+                        type: 'GET',
+                        data: {
+                            tableName: value,
+                        },
+                        dataType: 'json',
+                    })
+                    .done(function(response) {
+                        $('#parameterDropdown').empty();
+
+                        $('#parameterDropdown').append($('<option>', {
+                            value: null,
+                            text: 'Select option',
+                            selected: true,
+                            disabled: true
+                        }));
+
+                        console.log(response.data);
+
+                        $.each(response.data, function(value, text) {
+                            const option = $('<option>', {
+                                value: value,
+                                text: text
                             });
-                        })
-                        .fail(function(jqXHR, textStatus, errorThrown) {
-                            console.error("AJAX request failed: ", textStatus, errorThrown);
+                            if (value === selectedValue) {
+                                option.prop('selected', true);
+                            }
+                            $('#parameterDropdown').append(option);
                         });
-                }
-            });
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+                        console.error("AJAX request failed: ", textStatus, errorThrown);
+                    });
+            }
         });
     </script>
 @endpush

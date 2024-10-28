@@ -34,6 +34,31 @@ class Menu extends Model
         return $this->belongsTo(Menu::class, 'parent_id');
     }
 
+    protected function urlParameter(): Attribute
+    {
+        return Attribute::make(
+            get: function (?string $value, ?array $attributes) {
+                $parameter = null;
+
+                switch ($attributes['type']) {
+                    case 'single-link':
+                        $parameter = $attributes['parameter'];
+                        break;
+
+                    default:
+                        $model = config('constants.menu_type_options')[$attributes['type']] ?? null;
+                        if ($model) {
+                            $modelClass = "Modules\\CCMS\\Models\\$model";
+                            $parameter = optional($modelClass::find($attributes['parameter']))->slug;
+                        }
+                        break;
+                }
+
+                return $parameter;
+            }
+        );
+    }
+
     public function children()
     {
         return $this->hasMany(Menu::class, 'parent_id');
@@ -54,8 +79,9 @@ class Menu extends Model
             get: function (mixed $value, array $attributes) {
                 switch ($this->attributes['type']) {
                     case 'pages':
-                        //
-                        break;
+                        // return route('loadPage', Page::whereId($this->attributes['parameter'])->value('slug'));
+                    case 'fragment':
+                        return $this->attributes['parameter'];
                     case 'single-link':
                         return Config::get('app.url') . $this->attributes['parameter'];
                     default:

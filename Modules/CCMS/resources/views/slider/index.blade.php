@@ -16,10 +16,7 @@
                     $columns = [
                         ['title' => 'S.N', 'data' => 'DT_RowIndex', 'name' => 'DT_RowIndex', 'orderable' => false, 'searchable' => false],
                         ['title' => 'Location', 'data' => 'location', 'name' => 'location'],
-                        ['title' => 'Parent', 'data' => 'parent', 'name' => 'parent'],
                         ['title' => 'Title', 'data' => 'title', 'name' => 'title'],
-                        ['title' => 'Type', 'data' => 'type', 'name' => 'type'],
-                        ['title' => 'URL', 'data' => 'parameter', 'name' => 'parameter'],
                         ['title' => 'Order', 'data' => 'order', 'name' => 'order'],
                         ['title' => 'Status', 'data' => 'status', 'name' => 'status'],
                         ['title' => 'Action', 'data' => 'action', 'orderable' => false, 'searchable' => false],

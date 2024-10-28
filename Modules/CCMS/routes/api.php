@@ -15,5 +15,4 @@ use Modules\CCMS\Http\Controllers\CCMSController;
 */
 
 Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('ccms', CCMSController::class)->names('ccms');
 });

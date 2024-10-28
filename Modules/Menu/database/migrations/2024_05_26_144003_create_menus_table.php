@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('parent_id')->nullable();
             $table->integer('order')->nullable();
             $table->string('type', 255)->nullable();
-            $table->integer('status')->default(11);
+            $table->integer('status')->nullable();
             $table->text('parameter')->nullable();
             $table->timestamps();
         });
