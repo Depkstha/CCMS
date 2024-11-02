@@ -1,11 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\CCMS\Http\Controllers\BlogController;
 use Modules\CCMS\Http\Controllers\CategoryController;
 use Modules\CCMS\Http\Controllers\PageController;
+use Modules\CCMS\Http\Controllers\PartnerController;
+use Modules\CCMS\Http\Controllers\ServiceController;
 use Modules\CCMS\Http\Controllers\SettingController;
 use Modules\CCMS\Http\Controllers\SliderController;
 use Modules\CCMS\Http\Controllers\TeamController;
+use Modules\CCMS\Http\Controllers\TestimonialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +37,20 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::post('team/reorder', [TeamController::class, 'reorder'])->name('team.reorder');
     Route::resource('team', TeamController::class)->names('team');
 
+    Route::post('testimonial/reorder', [TestimonialController::class, 'reorder'])->name('testimonial.reorder');
+    Route::resource('testimonial', TestimonialController::class)->names('testimonial');
+
     Route::post('category/reorder', [CategoryController::class, 'reorder'])->name('category.reorder');
     Route::get('category/{id?}', [CategoryController::class, 'index'])->name('category.index');
     Route::resource('category', CategoryController::class)->names('category')->only(['store', 'edit', 'destroy']);
+
+    Route::post('partner/reorder', [PartnerController::class, 'reorder'])->name('partner.reorder');
+    Route::get('partner/{id?}', [PartnerController::class, 'index'])->name('partner.index');
+    Route::resource('partner', PartnerController::class)->names('partner')->only(['store', 'edit', 'destroy']);
+
+    Route::post('blog/reorder', [BlogController::class, 'reorder'])->name('blog.reorder');
+    Route::resource('blog', BlogController::class)->names('blog');
+
+    Route::post('service/reorder', [ServiceController::class, 'reorder'])->name('service.reorder');
+    Route::resource('service', ServiceController::class)->names('service');
 });

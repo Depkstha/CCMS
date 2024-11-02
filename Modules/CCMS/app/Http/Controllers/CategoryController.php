@@ -74,7 +74,7 @@ class CategoryController extends Controller
             ]);
 
             $category = $this->categoryService->updateCategory($request->id, categoryData: $validated);
-            flash()->success("Category for {$category->name} has been updated.");
+            flash()->success("Category for {$category->title} has been updated.");
             return to_route('category.index');
         }
 
@@ -92,7 +92,7 @@ class CategoryController extends Controller
         ]);
 
         $category = $this->categoryService->storeCategory($validated);
-        flash()->success("Category for {$category->name} has been created.");
+        flash()->success("Category for {$category->title} has been created.");
         return to_route('category.index');
     }
 
@@ -129,7 +129,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = $this->categoryService->deleteCategory($id);
-        return response()->json(['status' => 200, 'message' => "Category for {$category->name} has been deleted."], 200);
+        return response()->json(['status' => 200, 'message' => "Category for {$category->title} has been deleted."], 200);
     }
 
     public function reorder(Request $request)

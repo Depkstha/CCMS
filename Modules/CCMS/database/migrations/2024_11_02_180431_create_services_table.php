@@ -11,24 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
-            
             $table->text('title');
             $table->text('slug')->nullable();
+            $table->text('short_description')->nullable();
             $table->longText('description')->nullable();
 
-            $table->json('section')->nullable();
-            $table->string('banner')->nullable();
             $table->string('image')->nullable();
             $table->text('images')->nullable();
 
-            $table->string('template')->nullable();
-            $table->string('type')->nullable();
-
             $table->text('meta_title')->nullable();
-            $table->longText('meta_description')->nullable();
-            $table->longText('meta_keywords')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
 
             $table->text('sidebar_title')->nullable();
             $table->mediumText('sidebar_content')->nullable();
@@ -44,7 +39,6 @@ return new class extends Migration
             $table->integer('createdby')->unsigned()->nullable();
             $table->integer('updatedby')->unsigned()->nullable();
             $table->integer('order')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -54,6 +48,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('services');
     }
 };

@@ -152,11 +152,11 @@ class PageController extends Controller
 
     public function reorder(Request $request)
     {
-        $users = Page::all();
-        foreach ($users as $user) {
+        $pages = Page::all();
+        foreach ($pages as $page) {
             foreach ($request->order as $order) {
-                if ($order['id'] == $user->id) {
-                    $user->update(['order' => $order['position']]);
+                if ($order['id'] == $page->id) {
+                    $page->update(['order' => $order['position']]);
                 }
             }
         }
