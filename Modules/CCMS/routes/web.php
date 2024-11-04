@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Modules\CCMS\Http\Controllers\BlogController;
 use Modules\CCMS\Http\Controllers\CategoryController;
+use Modules\CCMS\Http\Controllers\CountryController;
+use Modules\CCMS\Http\Controllers\GalleryCategoryController;
+use Modules\CCMS\Http\Controllers\GalleryController;
 use Modules\CCMS\Http\Controllers\PageController;
 use Modules\CCMS\Http\Controllers\PartnerController;
 use Modules\CCMS\Http\Controllers\ServiceController;
@@ -53,4 +56,15 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     Route::post('service/reorder', [ServiceController::class, 'reorder'])->name('service.reorder');
     Route::resource('service', ServiceController::class)->names('service');
+
+    Route::post('country/reorder', [CountryController::class, 'reorder'])->name('country.reorder');
+    Route::resource('country', CountryController::class)->names('country');
+
+    Route::post('gallery-category/reorder', [GalleryCategoryController::class, 'reorder'])->name('galleryCategory.reorder');
+    Route::get('gallery-category/{id?}', [GalleryCategoryController::class, 'index'])->name('galleryCategory.index');
+    Route::resource('gallery-category', GalleryCategoryController::class)->names('galleryCategory')->only(['store', 'edit', 'destroy']);
+
+    Route::post('gallery/reorder', [GalleryController::class, 'reorder'])->name('gallery.reorder');
+    Route::get('gallery/{id?}', [GalleryController::class, 'index'])->name('gallery.index');
+    Route::resource('gallery', GalleryController::class)->names('gallery')->only(['store', 'edit', 'destroy']);
 });

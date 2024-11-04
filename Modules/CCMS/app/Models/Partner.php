@@ -3,8 +3,9 @@
 namespace Modules\CCMS\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
 // use Modules\CCMS\Database\Factories\PartnerFactory;
 
 class Partner extends Model
@@ -22,7 +23,7 @@ class Partner extends Model
 
         'status',
         'order',
-        
+
         'createdby',
         'updatedby',
     ];

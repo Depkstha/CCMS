@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-// use Modules\CCMS\Database\Factories\PageFactory;
-
-class Page extends Model
+class Country extends Model
 {
     use HasFactory;
 
@@ -18,37 +16,23 @@ class Page extends Model
     protected $fillable = [
         'title',
         'slug',
-        'section',
-        'template',
-        'type',
-        'banner',
+        'description',
         'image',
         'images',
-        'published_at',
-
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
         'sidebar_title',
         'sidebar_content',
         'sidebar_image',
-
         'button_text',
         'button_url',
-        'redirect',
-
-        'meta_title',
-        'meta_keywords',
-        'meta_description',
-
-        'date',
+        'button_target',
         'status',
+        'createdby',
+        'updatedby',
         'order',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'section' => 'array',
-        ];
-    }
 
     protected function images(): Attribute
     {
@@ -61,27 +45,6 @@ class Page extends Model
                 $parts = explode(',', $value);
                 return array_map(fn($part) => asset(trim($part)), $parts);
             }
-        );
-    }
-
-    protected function image(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => asset($value),
-        );
-    }
-
-    protected function banner(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => asset($value),
-        );
-    }
-
-    protected function sidebarImage(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => asset($value),
         );
     }
 }

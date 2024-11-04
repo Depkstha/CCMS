@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->string('image')->nullable();
 
-            $table->integer('status')->unsigned()->nullable();
+            $table->integer('status')->default(1);
             $table->integer('order')->unsigned()->nullable();
 
             $table->integer('createdby')->unsigned()->nullable();

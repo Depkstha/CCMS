@@ -32,9 +32,8 @@ return new class extends Migration
             $table->string('button_text')->nullable();
             $table->string('button_url')->nullable();
             $table->string('button_target')->nullable();
-
-            $table->date('date')->nullable();
-            $table->integer('status')->default(0);
+            
+            $table->integer('status')->default(1);
 
             $table->integer('createdby')->unsigned()->nullable();
             $table->integer('updatedby')->unsigned()->nullable();

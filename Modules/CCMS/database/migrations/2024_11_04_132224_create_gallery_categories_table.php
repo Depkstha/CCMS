@@ -11,20 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sliders', function (Blueprint $table) {
+        Schema::create('gallery_categories', function (Blueprint $table) {
             $table->id();
+            
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
-            $table->longText('description')->nullable();
 
-            $table->string('images')->nullable();
-
-            $table->string('button_text')->nullable();
-            $table->string('button_url')->nullable();
-            $table->string('button_target')->nullable();
-
-            $table->integer('order')->unsigned()->nullable();
             $table->integer('status')->default(1);
+            $table->integer('order')->unsigned()->nullable();
 
             $table->integer('createdby')->unsigned()->nullable();
             $table->integer('updatedby')->unsigned()->nullable();
@@ -37,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sliders');
+        Schema::dropIfExists('gallery_categories');
     }
 };
