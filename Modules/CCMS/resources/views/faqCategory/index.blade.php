@@ -1,20 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
+
+<div class="container-fluid">
         <x-dashboard.breadcumb :title="$title" />
         @if ($errors->any())
             <x-flash-message type="danger" :messages="$errors->all()" />
         @endif
 
         <div class="row">
-            <div class="col-xl-12">
+            <div class="col-lg-4 col-xl-3">
+                <div class="card profile-card">
+                    @include('ccms::faqCategory.add-faq-category-form')
+                </div>
+            </div>
+
+            <div class="col-lg-xl-8 col-lg-9">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title mb-0">{{ $title }}</h5>
-                        <a href="{{ route('country.create') }}" class="btn text-white"
-                            style="background-color: var(--vz-primary)"><i class="ri-add-line align-middle"></i> Create</a>
-                    </div>
                     <div class="card-body">
                         @php
                             $columns = [
@@ -26,7 +28,7 @@
                                     'searchable' => false,
                                     'sortable' => false,
                                 ],
-                                ['title' => 'Title', 'data' => 'title', 'name' => 'title'],
+                                ['title' => 'Name', 'data' => 'title', 'name' => 'title'],
                                 ['title' => 'Slug', 'data' => 'slug', 'name' => 'slug'],
                                 ['title' => 'Status', 'data' => 'status', 'name' => 'status'],
                                 [
@@ -37,7 +39,8 @@
                                 ],
                             ];
                         @endphp
-                        <x-data-table-script :route="route('country.index')" :reorder="route('country.reorder')" :columns="$columns" />
+
+                        <x-data-table-script :route="route('faqCategory.index')" :reorder="route('faqCategory.reorder')" :columns="$columns" />
                     </div>
                 </div>
             </div>

@@ -36,19 +36,19 @@
                 <div class="row gy-3">
                     <div class="col-lg-6">
                         {{ html()->label('Branch')->class('form-label')->for('branch_id') }}
-                        {{ html()->select('branch_id',[])->class('form-select')->placeholder('Select') }}
+                        {{ html()->select('branch_id', [])->class('form-select')->placeholder('Select') }}
                     </div>
-    
+
                     <div class="col-lg-6">
                         {{ html()->label('Address')->class('form-label')->for('address') }}
                         {{ html()->text('address')->class('form-control')->placeholder('Enter Address') }}
                     </div>
-    
+
                     <div class="col-lg-6">
                         {{ html()->label('Email')->class('form-label')->for('email') }}
                         {{ html()->text('email')->class('form-control')->placeholder('Enter Email') }}
                     </div>
-    
+
                     <div class="col-lg-6">
                         {{ html()->label('Mobile')->class('form-label')->for('mobile') }}
                         {{ html()->text('mobile')->class('form-control')->placeholder('Enter Mobile') }}
@@ -67,22 +67,22 @@
                         {{ html()->label('Facebook')->class('form-label')->for('facebook') }}
                         {{ html()->text('facebook')->class('form-control')->value(setting('facebook'))->placeholder('Enter Facebook Link') }}
                     </div>
-    
+
                     <div class="col-lg-4">
                         {{ html()->label('Youtube')->class('form-label')->for('youtube') }}
                         {{ html()->text('youtube')->class('form-control')->value(setting('youtube'))->placeholder('Enter Youtube Link') }}
                     </div>
-    
+
                     <div class="col-lg-4">
                         {{ html()->label('Twitter')->class('form-label')->for('twitter') }}
                         {{ html()->text('twitter')->class('form-control')->value(setting('twitter'))->placeholder('Enter Twitter Link') }}
                     </div>
-    
+
                     <div class="col-lg-4">
                         {{ html()->label('Linkedin')->class('form-label')->for('linkedin') }}
                         {{ html()->text('linkedin')->class('form-control')->value(setting('linkedin'))->placeholder('Enter Linkedin Link') }}
                     </div>
-    
+
                     <div class="col-lg-4">
                         {{ html()->label('Whatsapp')->class('form-label')->for('whatsapp') }}
                         {{ html()->text('whatsapp')->class('form-control')->value(setting('whatsapp'))->placeholder('Enter Whatsapp Link') }}
@@ -103,10 +103,9 @@
                         {{ html()->select('status', config('constants.page_status_options'))->class('form-select select2') }}
                     </div>
                 </div>
-                <x-form-buttons :editable="$editable" label="Save" href="{{ route('team.index') }}" />
-
             </div>
             <!-- end card body -->
+            <x-form-buttons :editable="$editable" label="Save" href="{{ route('team.index') }}" />
         </div>
 
         <div class="card featured-image-section">

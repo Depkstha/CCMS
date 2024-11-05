@@ -86,7 +86,7 @@ class GalleryCategoryController extends Controller
         ]);
 
         $validated = $request->validate([
-            'title' => ['required', 'string','unique:categories,title'],
+            'title' => ['required', 'string','unique:gallery_categories,title'],
             'slug' => ['required', 'string'],
             'order' => ['integer'],
         ]);

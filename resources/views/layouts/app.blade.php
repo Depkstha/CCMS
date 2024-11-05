@@ -25,6 +25,12 @@
 
     @stack('css')
 
+    <style>
+        :root{
+            --vz-primary: {{ setting('color') }};
+        }
+    </style>
+
 </head>
 
 <body>

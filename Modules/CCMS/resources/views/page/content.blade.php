@@ -131,9 +131,8 @@
                                 {{ html()->select('status', config('constants.page_status_options'))->class('form-select')->required() }}
                             </div>
 
-                            <div class="card-footer text-end">
-                                <button type="submit" class="btn btn-primary btn-sm">Publish</button>
-                            </div>
+                            <x-form-buttons :href="route('page.index')" label="Update" />
+
                         </div>
 
                         @if ($page->type == 'page')

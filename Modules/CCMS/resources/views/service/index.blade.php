@@ -29,7 +29,6 @@
                                 ['title' => 'Image', 'data' => 'image', 'name' => 'image'],
                                 ['title' => 'Title', 'data' => 'title', 'name' => 'title'],
                                 ['title' => 'Slug', 'data' => 'slug', 'name' => 'slug'],
-                                ['title' => 'Published Date', 'data' => 'date', 'name' => 'date'],
                                 ['title' => 'Status', 'data' => 'status', 'name' => 'status'],
                                 [
                                     'title' => 'Action',

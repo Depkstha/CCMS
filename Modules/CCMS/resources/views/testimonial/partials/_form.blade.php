@@ -41,10 +41,10 @@
                         {{ html()->select('status', config('constants.page_status_options'))->class('form-select select2') }}
                     </div>
                 </div>
-                <x-form-buttons :editable="$editable" label="Save" href="{{ route('team.index') }}" />
-
             </div>
             <!-- end card body -->
+
+            <x-form-buttons :editable="$editable" label="Save" href="{{ route('team.index') }}" />
         </div>
 
         <div class="card featured-image-section">

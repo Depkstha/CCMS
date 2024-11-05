@@ -61,9 +61,7 @@
                 {{ html()->select('status', config('constants.page_status_options'))->class('form-select') }}
             </div>
 
-            <div class="card-footer text-end">
-                <button type="submit" class="btn btn-primary btn-sm">Publish</button>
-            </div>
+            <x-form-buttons :href="route('country.index')" :label="isset($country) ? 'Update' : 'Create'" />
         </div>
 
         <div class="card featured-image-section">
