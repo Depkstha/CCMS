@@ -6,6 +6,7 @@ use Modules\CCMS\Http\Controllers\CategoryController;
 use Modules\CCMS\Http\Controllers\CountryController;
 use Modules\CCMS\Http\Controllers\GalleryCategoryController;
 use Modules\CCMS\Http\Controllers\GalleryController;
+use Modules\CCMS\Http\Controllers\InstitutionController;
 use Modules\CCMS\Http\Controllers\PageController;
 use Modules\CCMS\Http\Controllers\PartnerController;
 use Modules\CCMS\Http\Controllers\ServiceController;
@@ -67,4 +68,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::post('gallery/reorder', [GalleryController::class, 'reorder'])->name('gallery.reorder');
     Route::get('gallery/{id?}', [GalleryController::class, 'index'])->name('gallery.index');
     Route::resource('gallery', GalleryController::class)->names('gallery')->only(['store', 'edit', 'destroy']);
+
+    Route::post('institution/reorder', [InstitutionController::class, 'reorder'])->name('institution.reorder');
+    Route::get('institution/{id?}', [InstitutionController::class, 'index'])->name('institution.index');
+    Route::resource('institution', InstitutionController::class)->names('institution')->only(['store', 'edit', 'destroy']);
 });

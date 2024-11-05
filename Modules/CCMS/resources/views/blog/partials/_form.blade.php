@@ -11,7 +11,7 @@
 
                     <div class="col-6">
                         {{ html()->label('Category')->class('form-label')->for('category_id') }}
-                        {{ html()->select('category_id', $categoryOptions)->class('form-control')->placeholder('Select') }}
+                        {{ html()->select('category_id', $categoryOptions)->class('form-select')->placeholder('Select') }}
                     </div>
 
                     <div class="col-6">

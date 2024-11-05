@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Modules\CCMS\Models\Gallery;
+use Modules\CCMS\Models\GalleryCategory;
 use Modules\CCMS\Services\GalleryService;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -25,10 +26,10 @@ class GalleryController extends Controller
     {
         $isEditing = !is_null($id);
         $gallery = $isEditing ? $this->galleryService->getGalleryById($id) : null;
+        $categoryOptions = GalleryCategory::pluck('title', 'id');
 
         if (request()->ajax()) {
             $model = Gallery::query()->orderBy('order');
-
             return DataTables::eloquent($model)
                 ->addIndexColumn()
                 ->setRowClass('tableRow')
@@ -45,6 +46,8 @@ class GalleryController extends Controller
         return view('ccms::gallery.index', [
             'gallery' => $gallery,
             'title' => $isEditing ? 'Edit Gallery' : 'Add Gallery',
+            'editable' => $isEditing ? true : false,
+            'categoryOptions' => $categoryOptions,
         ]);
     }
 
@@ -69,10 +72,11 @@ class GalleryController extends Controller
 
         if ($isEditing) {
             $validated = $request->validate([
-                'title' => ['required', 'string', 'max:255','unique:categories,title,'.$request->id],
+                'title' => ['required', 'string', 'max:255', 'unique:categories,title,' . $request->id],
                 'slug' => ['required', 'string'],
-                'images' => ['required', 'string'],
-                'category_id' => ['nullable', 'integer']
+                'link' => ['nullable', 'string'],
+                'images' => ['nullable', 'string'],
+                'category_id' => ['nullable', 'integer'],
             ]);
 
             $gallery = $this->galleryService->updateGallery($request->id, galleryData: $validated);
@@ -84,13 +88,14 @@ class GalleryController extends Controller
         $order = $maxOrder ? ++$maxOrder : 1;
 
         $request->mergeIfMissing([
-            'order' => $order
+            'order' => $order,
         ]);
 
         $validated = $request->validate([
-            'title' => ['required', 'string','unique:galleries,title'],
+            'title' => ['required', 'string', 'unique:galleries,title'],
             'slug' => ['required', 'string'],
-            'images' => ['required', 'string'],
+            'link' => ['nullable', 'string'],
+            'images' => ['nullable', 'string'],
             'category_id' => ['nullable', 'integer'],
             'order' => ['integer'],
         ]);
@@ -138,9 +143,9 @@ class GalleryController extends Controller
 
     public function reorder(Request $request)
     {
-        $gallerys = $this->galleryService->getAllCategories();
+        $galleries = $this->galleryService->getAllGalleries();
 
-        foreach ($gallerys as $gallery) {
+        foreach ($galleries as $gallery) {
             foreach ($request->order as $order) {
                 if ($order['id'] == $gallery->id) {
                     $gallery->update(['order' => $order['position']]);

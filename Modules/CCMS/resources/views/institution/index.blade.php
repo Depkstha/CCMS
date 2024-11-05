@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-lg-4 col-xl-3">
                 <div class="card profile-card">
-                    @include('ccms::gallery.add-gallery-form')
+                    @include('ccms::institution.add-institution-form')
                 </div>
             </div>
 
@@ -27,8 +27,9 @@
                                     'searchable' => false,
                                     'sortable' => false,
                                 ],
+                                ['title' => 'Image', 'data' => 'image', 'name' => 'image'],
                                 ['title' => 'Name', 'data' => 'title', 'name' => 'title'],
-                                ['title' => 'Slug', 'data' => 'slug', 'name' => 'slug'],
+                                ['title' => 'URL', 'data' => 'url', 'name' => 'url'],
                                 ['title' => 'Status', 'data' => 'status', 'name' => 'status'],
                                 [
                                     'title' => 'Action',
@@ -39,7 +40,7 @@
                             ];
                         @endphp
 
-                        <x-data-table-script :route="route('gallery.index')" :reorder="route('gallery.reorder')" :columns="$columns" />
+                        <x-data-table-script :route="route('institution.index')" :reorder="route('institution.reorder')" :columns="$columns" />
                     </div>
                 </div>
             </div>
