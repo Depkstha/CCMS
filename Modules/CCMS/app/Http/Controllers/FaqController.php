@@ -136,7 +136,7 @@ class FaqController extends Controller
     public function destroy($id)
     {
         $faq = $this->faqService->deleteFaq($id);
-        return response()->json(['status' => 200, 'message' => "Faq for {$faq->title} has been deleted."], 200);
+        return response()->json(['status' => 200, 'message' => "Faq has been deleted."], 200);
     }
 
     public function reorder(Request $request)

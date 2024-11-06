@@ -14,7 +14,7 @@ use Modules\User\Http\Controllers\UserController;
 |
 */
 
-Route::group(['middleware' => ['web', 'auth']], function () {
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin/'], function () {
     Route::post('user/reorder', [UserController::class, 'reorder'])->name('user.reorder');
     Route::get('user/{id?}', [UserController::class, 'index'])->name('user.index');
     Route::resource('user', UserController::class)->names('user')->only(['store', 'edit', 'destroy']);

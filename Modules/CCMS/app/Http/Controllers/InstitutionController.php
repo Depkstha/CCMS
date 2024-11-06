@@ -134,7 +134,7 @@ class InstitutionController extends Controller
     public function destroy($id)
     {
         $institution = $this->institutionService->deleteInstitution($id);
-        return response()->json(['status' => 200, 'message' => "Institution for {$institution->title} has been deleted."], 200);
+        return response()->json(['status' => 200, 'message' => "Institution has been deleted."], 200);
     }
 
     public function reorder(Request $request)

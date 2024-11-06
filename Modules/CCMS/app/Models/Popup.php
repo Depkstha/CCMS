@@ -13,5 +13,18 @@ class Popup extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'title',
+        'slug',
+        'description',
+
+        'images',
+
+        'button_text',
+        'button_url',
+        'button_target',
+        
+        'status',
+        'order',
+    ];
 }

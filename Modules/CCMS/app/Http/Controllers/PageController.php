@@ -147,7 +147,7 @@ class PageController extends Controller
     {
         $page = Page::findOrFail($id);
         $page->delete();
-        return response()->json(['status' => 200, 'message' => "{$page->title} page has been deleted."], 200);
+        return response()->json(['status' => 200, 'message' => "Page has been deleted."], 200);
     }
 
     public function reorder(Request $request)

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar-size="lg"
     data-sidebar-image="none" data-preloader="disable">
 
 <head>
@@ -26,8 +26,13 @@
     @stack('css')
 
     <style>
-        :root{
+        :root {
             --vz-primary: {{ setting('color') }};
+            --primary-theme-color: {{ setting('color') }};
+            --vz-vertical-menu-item-hover-color: {{ setting('color') }};
+            --vz-vertical-menu-item-active-color: {{ setting('color') }};
+            --vz-vertical-menu-sub-item-hover-color: {{ setting('color') }};
+            --vz-vertical-menu-sub-item-active-color: {{ setting('color') }};
         }
     </style>
 

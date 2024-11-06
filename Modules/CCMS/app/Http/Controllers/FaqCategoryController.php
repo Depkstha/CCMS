@@ -129,7 +129,7 @@ class FaqCategoryController extends Controller
     public function destroy($id)
     {
         $faqCategory = $this->faqCategoryService->deleteFaqCategory($id);
-        return response()->json(['status' => 200, 'message' => "FaqCategory for {$faqCategory->title} has been deleted."], 200);
+        return response()->json(['status' => 200, 'message' => "Faq Category has been deleted."], 200);
     }
 
     public function reorder(Request $request)

@@ -129,7 +129,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = $this->categoryService->deleteCategory($id);
-        return response()->json(['status' => 200, 'message' => "Category for {$category->title} has been deleted."], 200);
+        return response()->json(['status' => 200, 'message' => "Category has been deleted."], 200);
     }
 
     public function reorder(Request $request)

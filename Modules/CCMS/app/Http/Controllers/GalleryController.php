@@ -138,7 +138,7 @@ class GalleryController extends Controller
     public function destroy($id)
     {
         $gallery = $this->galleryService->deleteGallery($id);
-        return response()->json(['status' => 200, 'message' => "Gallery for {$gallery->title} has been deleted."], 200);
+        return response()->json(['status' => 200, 'message' => "Gallery has been deleted."], 200);
     }
 
     public function reorder(Request $request)

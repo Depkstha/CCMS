@@ -129,7 +129,7 @@ class GalleryCategoryController extends Controller
     public function destroy($id)
     {
         $galleryCategory = $this->galleryCategoryService->deleteGalleryCategory($id);
-        return response()->json(['status' => 200, 'message' => "GalleryCategory for {$galleryCategory->title} has been deleted."], 200);
+        return response()->json(['status' => 200, 'message' => "Gallery Category has been deleted."], 200);
     }
 
     public function reorder(Request $request)

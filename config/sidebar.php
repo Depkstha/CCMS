@@ -2,7 +2,7 @@
 return [
     [
         'text' => 'Dashboard',
-        'url' => 'dashboard',
+        'url' => 'admin/dashboard',
         'icon' => 'ri-home-4-line',
     ],
 
@@ -12,7 +12,7 @@ return [
         'module' => 'User',
         'submenu' => [
             [
-                'url' => 'user',
+                'url' => 'admin/user',
                 'text' => 'User Credentials',
                 // 'can' => ['user.index'],
             ],
@@ -21,7 +21,7 @@ return [
 
     [
         'text' => 'Setting',
-        'url' => 'setting',
+        'url' => 'admin/setting',
         'icon' => 'ri-settings-4-line',
         'module' => 'CCMS',
         // 'can' => ['setting.index'],
@@ -29,15 +29,23 @@ return [
 
     [
         'text' => 'Menu',
-        'url' => 'menu',
+        'url' => 'admin/menu',
         'icon' => 'ri-menu-line',
         'module' => 'CCMS',
         // 'can' => ['setting.index'],
     ],
 
     [
+        'text' => 'Offer Popup',
+        'url' => 'admin/popup',
+        'icon' => 'ri-gift-2-line',
+        'module' => 'CCMS',
+        // 'can' => ['setting.index'],
+    ],
+
+    [
         'text' => 'Page',
-        'url' => 'page',
+        'url' => 'admin/page',
         'icon' => 'ri-pages-line',
         'module' => 'CCMS',
         // 'can' => ['setting.index'],
@@ -45,7 +53,7 @@ return [
 
     [
         'text' => 'Slider',
-        'url' => 'slider',
+        'url' => 'admin/slider',
         'icon' => 'ri-slideshow-3-line',
         'module' => 'CCMS',
         // 'can' => ['setting.index'],
@@ -53,7 +61,7 @@ return [
 
     [
         'text' => 'Testimonial',
-        'url' => 'testimonial',
+        'url' => 'admin/testimonial',
         'icon' => 'ri-feedback-line',
         'module' => 'CCMS',
         // 'can' => ['setting.index'],
@@ -61,7 +69,7 @@ return [
 
     [
         'text' => 'Partner',
-        'url' => 'partner',
+        'url' => 'admin/partner',
         'icon' => 'ri-hand-heart-line',
         'module' => 'CCMS',
         // 'can' => ['setting.index'],
@@ -69,7 +77,7 @@ return [
 
     [
         'text' => 'Service',
-        'url' => 'service',
+        'url' => 'admin/service',
         'icon' => 'ri-customer-service-2-line',
         'module' => 'CCMS',
         // 'can' => ['setting.index'],
@@ -77,7 +85,7 @@ return [
 
     [
         'text' => 'Team',
-        'url' => 'team',
+        'url' => 'admin/team',
         'icon' => 'ri-team-line',
         'module' => 'CCMS',
         // 'can' => ['setting.index'],
@@ -89,12 +97,12 @@ return [
         'module' => 'CCMS',
         'submenu' => [
             [
-                'url' => 'category',
+                'url' => 'admin/category',
                 'text' => 'Blog Category',
                 // 'can' => ['user.index'],
             ],
             [
-                'url' => 'blog',
+                'url' => 'admin/blog',
                 'text' => 'Blog',
                 // 'can' => ['user.index'],
             ],
@@ -107,12 +115,12 @@ return [
         'module' => 'CCMS',
         'submenu' => [
             [
-                'url' => 'country',
+                'url' => 'admin/country',
                 'text' => 'Destination',
                 // 'can' => ['user.index'],
             ],
             [
-                'url' => 'institution',
+                'url' => 'admin/institution',
                 'text' => 'Representative Institution',
                 // 'can' => ['user.index'],
             ],
@@ -125,12 +133,12 @@ return [
         'module' => 'CCMS',
         'submenu' => [
             [
-                'url' => 'gallery-category',
+                'url' => 'admin/gallery-category',
                 'text' => 'Gallery Category',
                 // 'can' => ['user.index'],
             ],
             [
-                'url' => 'gallery',
+                'url' => 'admin/gallery',
                 'text' => 'Gallery',
                 // 'can' => ['user.index'],
             ],
@@ -143,12 +151,12 @@ return [
         'module' => 'CCMS',
         'submenu' => [
             [
-                'url' => 'faq-category',
+                'url' => 'admin/faq-category',
                 'text' => 'FAQ Category',
                 // 'can' => ['user.index'],
             ],
             [
-                'url' => 'faq',
+                'url' => 'admin/faq',
                 'text' => 'FAQ',
                 // 'can' => ['user.index'],
             ],

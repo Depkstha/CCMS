@@ -135,7 +135,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = $this->userService->deleteUser($id);
-        return response()->json(['status' => 200, 'message' => "User for {$user->name} has been deleted."], 200);
+        return response()->json(['status' => 200, 'message' => "User has been deleted."], 200);
     }
 
     public function reorder(Request $request)

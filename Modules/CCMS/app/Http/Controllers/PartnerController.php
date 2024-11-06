@@ -134,7 +134,7 @@ class PartnerController extends Controller
     public function destroy($id)
     {
         $partner = $this->partnerService->deletePartner($id);
-        return response()->json(['status' => 200, 'message' => "Partner for {$partner->title} has been deleted."], 200);
+        return response()->json(['status' => 200, 'message' => "Partner has been deleted."], 200);
     }
 
     public function reorder(Request $request)

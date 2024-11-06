@@ -6,7 +6,7 @@
                 <div class="row gy-3">
                     <div class="col-md-6">
                         {{ html()->label('Title')->class('form-label') }}
-                        {{ html()->text('title')->class('form-control')->placeholder('Display Title') }}
+                        {{ html()->text('title')->class('form-control')->placeholder('Menu Title') }}
                         {{ html()->div('Menu title is required')->class('invalid-feedback') }}
                     </div>
 
@@ -59,10 +59,9 @@
                         {{ html()->select('status', config('constants.page_status_options'))->class('form-select select2') }}
                     </div>
                 </div>
-                <x-form-buttons :editable="$editable" label="Save" href="{{ route('menu.index') }}" />
-
             </div>
             <!-- end card body -->
+            <x-form-buttons :editable="$editable" label="Save" href="{{ route('menu.index') }}" />
         </div>
 
         <div class="card">
@@ -89,7 +88,7 @@
         $(document).ready(function() {
             const editable = '{{ $editable }}';
             console.log(editable);
-            
+
             if (editable == 1) {
                 const selectedValue = "{{ $menu->parameter ?? null }}";
                 $('#menuType').trigger('change', [selectedValue]);

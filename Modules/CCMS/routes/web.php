@@ -11,6 +11,7 @@ use Modules\CCMS\Http\Controllers\GalleryController;
 use Modules\CCMS\Http\Controllers\InstitutionController;
 use Modules\CCMS\Http\Controllers\PageController;
 use Modules\CCMS\Http\Controllers\PartnerController;
+use Modules\CCMS\Http\Controllers\PopupController;
 use Modules\CCMS\Http\Controllers\ServiceController;
 use Modules\CCMS\Http\Controllers\SettingController;
 use Modules\CCMS\Http\Controllers\SliderController;
@@ -28,7 +29,7 @@ use Modules\CCMS\Http\Controllers\TestimonialController;
 |
  */
 
-Route::group(['middleware' => ['web', 'auth']], function () {
+Route::group(['middleware' => ['web', 'auth'],'prefix' => 'admin/'], function () {
 
     Route::post('page/reorder', [PageController::class, 'reorder'])->name('page.reorder');
     Route::get('page/{id}/edit-content', [PageController::class, 'editContent'])->name('page.editContent');
@@ -39,6 +40,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     Route::post('slider/reorder', [SliderController::class, 'reorder'])->name('slider.reorder');
     Route::resource('slider', SliderController::class)->names('slider');
+
+    Route::post('popup/reorder', [PopupController::class, 'reorder'])->name('popup.reorder');
+    Route::resource('popup', PopupController::class)->names('popup');
 
     Route::post('team/reorder', [TeamController::class, 'reorder'])->name('team.reorder');
     Route::resource('team', TeamController::class)->names('team');
