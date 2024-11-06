@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('menu_location_id')->nullable();
-            $table->string('title', 255)->nullable();
-            $table->string('alias', 255)->nullable();
-            $table->string('target', 255)->default('_self');
-            $table->string('icon_class', 255)->nullable();
+            $table->string('title')->nullable();
+            $table->string('alias')->nullable();
+            $table->string('target')->default('_self');
+            $table->string('icon')->nullable();
+            $table->string('image')->nullable();
             $table->unsignedInteger('parent_id')->nullable();
             $table->integer('order')->nullable();
-            $table->string('type', 255)->nullable();
+            $table->string('type')->nullable();
             $table->integer('status')->nullable();
             $table->text('parameter')->nullable();
             $table->timestamps();

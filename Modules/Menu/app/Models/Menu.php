@@ -19,7 +19,8 @@ class Menu extends Model
         'title',
         'alias',
         'target',
-        'icon_class',
+        'image',
+        'icon',
         'parent_id',
         'order',
         'type',
@@ -88,6 +89,13 @@ class Menu extends Model
                         return '#';
                 }
             },
+        );
+    }
+
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => asset($value),
         );
     }
 }

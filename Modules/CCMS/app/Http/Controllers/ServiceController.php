@@ -23,7 +23,6 @@ class ServiceController extends Controller
                 ->editColumn('image', function (Service $service) {
                     return "<img src='{$service->image}' alt='{$service->title}' class='rounded avatar-sm material-shadow ms-2 img-thumbnail'>";
                 })
-                ->editColumn('date', '{!! getFormatted(date:$date) ?? "N/A" !!}')
                 ->editColumn('status', function (Service $service) {
                     $status = $service->status ? 'Published' : 'Draft';
                     $color = $service->status ? 'text-success' : 'text-danger';

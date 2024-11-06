@@ -36,7 +36,7 @@
                 <div class="row gy-3">
                     <div class="col-lg-6">
                         {{ html()->label('Branch')->class('form-label')->for('branch_id') }}
-                        {{ html()->select('branch_id', [])->class('form-select choices-select')->placeholder('Select') }}
+                        {{ html()->select('branch_id', $branchOptions)->class('form-select choices-select')->placeholder('Select') }}
                     </div>
 
                     <div class="col-lg-6">

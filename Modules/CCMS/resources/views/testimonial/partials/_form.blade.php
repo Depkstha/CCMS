@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row gy-3">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         {{ html()->label('Name')->class('form-label') }}
                         {{ html()->span('*')->class('text-danger') }}
                         {{ html()->text('title')->class('form-control')->placeholder('Enter Name')->required() }}
@@ -18,6 +18,11 @@
                     <div class="col-md-6">
                         {{ html()->label('Company')->class('form-label') }}
                         {{ html()->text('company')->class('form-control')->placeholder('Enter Company') }}
+                    </div>
+
+                    <div class="col-lg-6">
+                        {{ html()->label('Branch')->class('form-label')->for('branch_id') }}
+                        {{ html()->select('branch_id', $branchOptions)->class('form-select choices-select')->placeholder('Select') }}
                     </div>
 
                     <div class="col-12">

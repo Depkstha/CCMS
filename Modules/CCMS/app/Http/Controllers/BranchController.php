@@ -5,10 +5,10 @@ namespace Modules\CCMS\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Modules\CCMS\Models\Test;
+use Modules\CCMS\Models\Branch;
 use Yajra\DataTables\Facades\DataTables;
 
-class TestController extends Controller
+class BranchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,25 +16,26 @@ class TestController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $model = Test::query()->orderBy('order');
+            $model = Branch::query()->orderBy('order');
             return DataTables::eloquent($model)
                 ->addIndexColumn()
                 ->setRowClass('tableRow')
-                ->editColumn('image', function (Test $test) {
-                    return "<img src='{$test->image}' alt='{$test->title}' class='rounded avatar-sm material-shadow ms-2 img-thumbnail'>";
+                ->editColumn('image', function (Branch $branch) {
+                    return "<img src='{$branch->image}' alt='{$branch->title}' class='rounded avatar-sm material-shadow ms-2 img-thumbnail'>";
                 })
-                ->editColumn('status', function (Test $test) {
-                    $status = $test->status ? 'Published' : 'Draft';
-                    $color = $test->status ? 'text-success' : 'text-danger';
+                ->editColumn('date', '{!! getFormatted(date:$date) ?? "N/A" !!}')
+                ->editColumn('status', function (Branch $branch) {
+                    $status = $branch->status ? 'Published' : 'Draft';
+                    $color = $branch->status ? 'text-success' : 'text-danger';
                     return "<p class='{$color}'>{$status}</p>";
                 })
-                ->addColumn('action', 'ccms::test.datatable.action')
+                ->addColumn('action', 'ccms::branch.datatable.action')
                 ->rawColumns(['image', 'status', 'action'])
                 ->toJson();
         }
 
-        return view('ccms::test.index', [
-            'title' => 'Test List',
+        return view('ccms::branch.index', [
+            'title' => 'Branch List',
         ]);
     }
 
@@ -43,8 +44,8 @@ class TestController extends Controller
      */
     public function create()
     {
-        return view('ccms::test.create', [
-            'title' => 'Create Test',
+        return view('ccms::branch.create', [
+            'title' => 'Create Branch',
             'editable' => false,
         ]);
     }
@@ -54,7 +55,7 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        $maxOrder = Test::max('order');
+        $maxOrder = Branch::max('order');
         $order = $maxOrder ? ++$maxOrder : 1;
 
         $request->mergeIfMissing([
@@ -68,9 +69,9 @@ class TestController extends Controller
                 'title' => 'required',
             ]);
 
-            Test::create($request->all());
-            flash()->success("Test has been created!");
-            return redirect()->route('test.index');
+            Branch::create($request->all());
+            flash()->success("Branch has been created!");
+            return redirect()->route('branch.index');
 
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage())->withInput();
@@ -90,11 +91,11 @@ class TestController extends Controller
      */
     public function edit($id)
     {
-        $test = Test::findOrFail($id);
-        return view('ccms::test.edit', [
-            'title' => 'Edit Test',
+        $branch = Branch::findOrFail($id);
+        return view('ccms::branch.edit', [
+            'title' => 'Edit Branch',
             'editable' => true,
-            'test' => $test,
+            'branch' => $branch,
         ]);
     }
 
@@ -104,9 +105,9 @@ class TestController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([]);
-        $test = Test::findOrFail($id);
-        $test->update($request->all());
-        flash()->success("Test has been updated.");
+        $branch = Branch::findOrFail($id);
+        $branch->update($request->all());
+        flash()->success("Branch has been updated.");
         return redirect()->back();
     }
 
@@ -115,18 +116,18 @@ class TestController extends Controller
      */
     public function destroy($id)
     {
-        $test = Test::findOrFail($id);
-        $test->delete();
-        return response()->json(['status' => 200, 'message' => "Test has been deleted."], 200);
+        $branch = Branch::findOrFail($id);
+        $branch->delete();
+        return response()->json(['status' => 200, 'message' => "Branch has been deleted."], 200);
     }
 
     public function reorder(Request $request)
     {
-        $tests = Test::all();
-        foreach ($tests as $test) {
+        $branchs = Branch::all();
+        foreach ($branchs as $branch) {
             foreach ($request->order as $order) {
-                if ($order['id'] == $test->id) {
-                    $test->update(['order' => $order['position']]);
+                if ($order['id'] == $branch->id) {
+                    $branch->update(['order' => $order['position']]);
                 }
             }
         }

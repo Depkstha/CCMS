@@ -23,7 +23,6 @@ class CountryController extends Controller
                 ->editColumn('image', function (Country $country) {
                     return "<img src='{$country->image}' alt='{$country->title}' class='rounded avatar-sm material-shadow ms-2 img-thumbnail'>";
                 })
-                ->editColumn('date', '{!! getFormatted(date:$date) ?? "N/A" !!}')
                 ->editColumn('status', function (Country $country) {
                     $status = $country->status ? 'Published' : 'Draft';
                     $color = $country->status ? 'text-success' : 'text-danger';

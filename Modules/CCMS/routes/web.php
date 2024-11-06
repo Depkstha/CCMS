@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\CCMS\Http\Controllers\BlogController;
+use Modules\CCMS\Http\Controllers\BranchController;
 use Modules\CCMS\Http\Controllers\CategoryController;
 use Modules\CCMS\Http\Controllers\CountryController;
 use Modules\CCMS\Http\Controllers\FaqCategoryController;
@@ -64,6 +65,9 @@ Route::group(['middleware' => ['web', 'auth'],'prefix' => 'admin/'], function ()
 
     Route::post('service/reorder', [ServiceController::class, 'reorder'])->name('service.reorder');
     Route::resource('service', ServiceController::class)->names('service');
+
+    Route::post('branch/reorder', [BranchController::class, 'reorder'])->name('branch.reorder');
+    Route::resource('branch', BranchController::class)->names('branch');
 
     Route::post('test/reorder', [TestController::class, 'reorder'])->name('test.reorder');
     Route::resource('test', TestController::class)->names('test');

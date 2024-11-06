@@ -22,6 +22,7 @@ class Testimonial extends Model
         'designation',
         'company',
         'image',
+        'branch_id',
         'status',
         'order',
         'createdby',
@@ -35,4 +36,7 @@ class Testimonial extends Model
         );
     }
 
+    public function branch(){
+        return $this->belongsTo(Branch::class, 'branch_id');
+    }
 }

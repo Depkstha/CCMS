@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->string('designation')->nullable();
             $table->string('company')->nullable();
+            $table->integer('branch_id')->unsigned()->nullable();
 
             $table->string('image')->nullable();
             $table->integer('status')->default(1);

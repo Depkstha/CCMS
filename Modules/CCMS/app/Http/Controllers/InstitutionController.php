@@ -5,6 +5,7 @@ namespace Modules\CCMS\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Modules\CCMS\Models\Country;
 use Modules\CCMS\Models\Institution;
 use Modules\CCMS\Services\InstitutionService;
 use Yajra\DataTables\Facades\DataTables;
@@ -23,6 +24,7 @@ class InstitutionController extends Controller
      */
     public function index(?int $id = null)
     {
+        $countryOptions = Country::where('status', 1)->pluck('title', 'id');
         $isEditing = !is_null($id);
         $institution = $isEditing ? $this->institutionService->getInstitutionById($id) : null;
 
@@ -49,6 +51,7 @@ class InstitutionController extends Controller
             'institution' => $institution,
             'editable' => $isEditing ? true : false,
             'title' => $isEditing ? 'Edit Institution' : 'Add Institution',
+            'countryOptions' => $countryOptions,
         ]);
     }
 

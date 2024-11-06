@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Modules\CCMS\Models\Branch;
 use Modules\CCMS\Models\Testimonial;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -44,9 +45,11 @@ class TestimonialController extends Controller
      */
     public function create()
     {
+        $branchOptions = Branch::where('status', 1)->pluck('title', 'id');
         return view('ccms::testimonial.create', [
             'title' => 'Create Testimonial',
             'editable' => false,
+            'branchOptions' => $branchOptions
         ]);
     }
 
@@ -91,11 +94,13 @@ class TestimonialController extends Controller
      */
     public function edit($id)
     {
+        $branchOptions = Branch::where('status', 1)->pluck('title', 'id');
         $testimonial = Testimonial::findOrFail($id);
         return view('ccms::testimonial.edit', [
             'title' => 'Edit Testimonial',
             'editable' => true,
             'testimonial' => $testimonial,
+            'branchOptions' => $branchOptions
         ]);
     }
 

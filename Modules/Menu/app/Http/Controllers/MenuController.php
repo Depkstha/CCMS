@@ -182,6 +182,7 @@ class MenuController extends Controller
     public function getMenuTypeOptions(Request $request)
     {
         $tableName = $request->tableName;
+        
         switch ($tableName) {
 
             case 'pages':

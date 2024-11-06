@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Modules\CCMS\Models\Branch;
 use Modules\CCMS\Models\Team;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -44,9 +45,11 @@ class TeamController extends Controller
      */
     public function create()
     {
+        $branchOptions = Branch::where('status', 1)->pluck('title', 'id');
         return view('ccms::team.create', [
             'title' => 'Create Team',
             'editable' => false,
+            'branchOptions' => $branchOptions
         ]);
     }
 
@@ -91,11 +94,13 @@ class TeamController extends Controller
      */
     public function edit($id)
     {
+        $branchOptions = Branch::where('status', 1)->pluck('title', 'id');
         $team = Team::findOrFail($id);
         return view('ccms::team.edit', [
             'title' => 'Edit Team',
             'editable' => true,
             'team' => $team,
+            'branchOptions' => $branchOptions
         ]);
     }
 
