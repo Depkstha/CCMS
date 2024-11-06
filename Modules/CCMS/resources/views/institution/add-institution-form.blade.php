@@ -24,6 +24,11 @@
                 <x-image-input :editable="$editable" id="image" name="image" :data="$editable ? $institution->getRawOriginal('image') : null" :multiple="false" />
             </div>
 
+            <div class="mb-3">
+                {{ html()->label('Country')->class('form-label')->for('country_id') }}
+                {{ html()->select('country_id', $countryOptions)->class('form-select choices-select')->placeholder('Select') }}
+            </div>
+
         </div>
 
         <x-form-buttons :href="route('institution.index')" :label="isset($institution) ? 'Update' : 'Create'" />

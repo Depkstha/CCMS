@@ -29,9 +29,4 @@ class Faq extends Model
     public function category(){
         return $this->belongsTo(FaqCategory::class, 'category_id');
     }
-
-    // protected static function newFactory(): FaqFactory
-    // {
-    //     // return FaqFactory::new();
-    // }
 }

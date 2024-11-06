@@ -16,9 +16,11 @@ class Country extends Model
     protected $fillable = [
         'title',
         'slug',
+        'short_description',
         'description',
         'image',
         'images',
+        'banner',
         'meta_title',
         'meta_description',
         'meta_keywords',
@@ -45,6 +47,27 @@ class Country extends Model
                 $parts = explode(',', $value);
                 return array_map(fn($part) => asset(trim($part)), $parts);
             }
+        );
+    }
+
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => asset($value),
+        );
+    }
+
+    protected function banner(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => asset($value),
+        );
+    }
+
+    protected function sidebarImage(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => asset($value),
         );
     }
 }

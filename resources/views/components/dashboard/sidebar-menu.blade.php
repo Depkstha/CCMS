@@ -35,7 +35,7 @@
              data-bs-toggle="collapse" role="button" aria-expanded="false" 
              aria-controls="{{ str()->slug($menu['text']) }}" 
              href="#{{ str()->slug($menu['text']) }}">
-            <i class="{{ $menu['icon'] }}"></i><span data-key="t-customers">{{ $menu['text'] }}</span>
+            <i class="{{ $menu['icon'] }}"></i><span data-key="t-{{ str()->slug($menu['text']) }}">{{ $menu['text'] }}</span>
           </a>
 
           <div class="menu-dropdown @if ($isActive) show @endif collapse" 
@@ -56,7 +56,7 @@
         @else
           <a href="{{ url($menu['url']) ?? '#' }}" 
              class="nav-link @if (\Request::is($menu['url']) || \Request::is($menu['url'] . '/*')) active @endif">
-            <i class="{{ $menu['icon'] }}"></i><span data-key="t-customers">{{ $menu['text'] }}</span>
+            <i class="{{ $menu['icon'] }}"></i><span data-key="t-{{ str()->slug($menu['text']) }}">{{ $menu['text'] }}</span>
           </a>
         @endif
       </li>

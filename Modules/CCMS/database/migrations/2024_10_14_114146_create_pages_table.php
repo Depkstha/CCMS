@@ -41,6 +41,7 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->integer('status')->default(1);
 
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->integer('createdby')->unsigned()->nullable();
             $table->integer('updatedby')->unsigned()->nullable();
             $table->integer('order')->nullable();

@@ -19,6 +19,7 @@ class Institution extends Model
         'slug',
         'url',
         'image',
+        'country_id',
 
         'status',
         'order',
@@ -32,5 +33,9 @@ class Institution extends Model
         return Attribute::make(
             get: fn($value) => asset($value),
         );
+    }
+
+    public function country(){
+        return $this->belongsTo(Country::class, 'country_id');
     }
 }

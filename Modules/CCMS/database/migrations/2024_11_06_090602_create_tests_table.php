@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->text('title');
             $table->text('slug')->nullable();
@@ -20,7 +20,6 @@ return new class extends Migration
 
             $table->string('image')->nullable();
             $table->string('banner')->nullable();
-
             $table->text('images')->nullable();
 
             $table->text('meta_title')->nullable();
@@ -49,6 +48,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('tests');
     }
 };

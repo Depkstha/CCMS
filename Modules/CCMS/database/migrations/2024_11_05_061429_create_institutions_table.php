@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('status')->default(1);
             $table->integer('order')->unsigned()->nullable();
 
+            $table->integer('country_id')->unsigned()->nullable();
             $table->integer('createdby')->unsigned()->nullable();
             $table->integer('updatedby')->unsigned()->nullable();
             $table->timestamps();

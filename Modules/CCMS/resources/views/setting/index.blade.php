@@ -265,7 +265,7 @@
 
                                     <div class="col-lg-4">
                                         {{ html()->label('Preloader')->class('form-label')->for('preloader_check') }}
-                                        {{ html()->select('preloader_check', ['1' => 'Enable', '0' => 'Disable'])->class('form-select')->value(setting('color')) }}
+                                        {{ html()->select('preloader_check', ['1' => 'Enable', '0' => 'Disable'])->class('form-select choices-select')->value(setting('color')) }}
                                     </div>
 
                                     <div class="col-lg-4">

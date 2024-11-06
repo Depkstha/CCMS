@@ -128,7 +128,7 @@
                             </div>
                             <div class="card-body">
                                 {{ html()->label('Status')->class('form-label visually-hidden')->for('status') }}
-                                {{ html()->select('status', config('constants.page_status_options'))->class('form-select')->required() }}
+                                {{ html()->select('status', config('constants.page_status_options'))->class('form-select choices-select')->required() }}
                             </div>
 
                             <x-form-buttons :href="route('page.index')" label="Update" />
@@ -144,7 +144,7 @@
                                 </div>
                                 <div class="card-body">
                                     {{ html()->label('Template')->class('form-label visually-hidden')->for('template') }}
-                                    {{ html()->select('template', getPageTemplateOptions())->class('form-select')->placeholder('Select')->required() }}
+                                    {{ html()->select('template', getPageTemplateOptions())->class('form-select choices-select')->placeholder('Select')->required() }}
                                 </div>
                             </div>
                         @endif
@@ -157,9 +157,9 @@
                                     </h6>
                                 </div>
                                 <div class="card-body">
-                                    {{ html()->label('Parent Page')->class('form-label')->for('parent_page') }}
+                                    {{ html()->label('Parent Page')->class('form-label')->for('parent_id') }}
                                     {{ html()->span('*')->class('text-danger') }}
-                                    {{ html()->select('parent_page', $pageOptions ?? [])->class('form-select')->placeholder('Select')->required() }}
+                                    {{ html()->select('parent_id', $pageOptions ?? [])->class('form-select choices-select')->placeholder('Select')->required() }}
                                 </div>
                             </div>
                         @endif
@@ -246,7 +246,7 @@
                                         <div class="col-lg-12">
                                             {{ html()->label('Target')->class('form-label')->for('redirect') }}
                                             {{ html()->span('*')->class('text-danger') }}
-                                            {{ html()->select('redirect', config('constants.redirect_options'))->class('form-select')->required() }}
+                                            {{ html()->select('redirect', config('constants.redirect_options'))->class('form-select choices-select')->required() }}
                                         </div>
                                     </div>
                                 </div>

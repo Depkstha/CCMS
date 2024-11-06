@@ -17,22 +17,22 @@
 
                     <div class="col-md-4">
                         {{ html()->label('Location')->class('form-label') }}
-                        {{ html()->select('menu_location_id', config('constants.menu_location_options'))->class('form-select select2')->required(true) }}
+                        {{ html()->select('menu_location_id', config('constants.menu_location_options'))->class('form-select choices-select ')->required(true) }}
                     </div>
 
                     <div class="col-md-4">
                         {{ html()->label('Type')->class('form-label') }}
-                        {{ html()->select('type', $menuTypes)->id('menuType')->class('form-select')->required(true) }}
+                        {{ html()->select('type', $menuTypes)->id('menuType')->class('form-select choices-select')->required(true) }}
                     </div>
 
                     <div class="col-md-4">
                         {{ html()->label('Sub menu of (Empty if Parent Menu)')->class('form-label') }}
-                        {{ html()->select('parent_id', $menuOptions)->class('form-select select2')->placeholder('Select Parent') }}
+                        {{ html()->select('parent_id', $menuOptions)->class('form-select choices-select ')->placeholder('Select Parent') }}
                     </div>
 
                     <div class="col-md-4 dropdown-row" style="display: none">
                         {{ html()->label('Ref (select Reference)')->class('form-label') }}
-                        {{ html()->select('parameter', [])->id('parameterDropdown')->class('form-select select2')->placeholder('Select option') }}
+                        {{ html()->select('parameter', [])->id('parameterDropdown')->class('form-select choices-select ')->placeholder('Select option') }}
                         {{ html()->div('Reference is required')->class('invalid-feedback') }}
                     </div>
 
@@ -56,7 +56,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        {{ html()->select('status', config('constants.page_status_options'))->class('form-select select2') }}
+                        {{ html()->select('status', config('constants.page_status_options'))->class('form-select choices-select ') }}
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        {{ html()->select('target', config('constants.redirect_options'))->class('form-select select2') }}
+                        {{ html()->select('target', config('constants.redirect_options'))->class('form-select choices-select ') }}
                     </div>
                 </div>
             </div>

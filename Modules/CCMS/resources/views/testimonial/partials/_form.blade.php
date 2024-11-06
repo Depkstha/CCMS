@@ -38,7 +38,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        {{ html()->select('status', config('constants.page_status_options'))->class('form-select select2') }}
+                        {{ html()->select('status', config('constants.page_status_options'))->class('form-select choices-select ') }}
                     </div>
                 </div>
             </div>

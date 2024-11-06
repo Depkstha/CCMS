@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Modules\CCMS\Models\Blog;
+use Modules\CCMS\Models\Country;
 use Modules\CCMS\Models\Page;
+use Modules\CCMS\Models\Service;
 use Modules\Menu\Interfaces\MenuInterface;
 use Modules\Menu\Models\Menu;
 use Yajra\DataTables\Facades\DataTables;
@@ -180,15 +182,22 @@ class MenuController extends Controller
     public function getMenuTypeOptions(Request $request)
     {
         $tableName = $request->tableName;
-
         switch ($tableName) {
 
             case 'pages':
-                $menuTypeOptions = Page::where('type', 'page')->pluck('title', 'id');
+                $menuTypeOptions = Page::where(['type' => 'page', 'status' => 1])->pluck('title', 'id');
                 break;
 
-            case 'posts':
-                // $menuTypeOptions = $this->post->pluck();
+            case 'blogs':
+                $menuTypeOptions = Blog::where('status', 1)->pluck('title', 'id');
+                break;
+
+            case 'services':
+                $menuTypeOptions = Service::where('status', 1)->pluck('title', 'id');
+                break;
+
+            case 'countries':
+                $menuTypeOptions = Country::where('status', 1)->pluck('title', 'id');
                 break;
 
             default:

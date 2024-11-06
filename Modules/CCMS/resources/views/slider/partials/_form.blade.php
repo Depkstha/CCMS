@@ -38,7 +38,7 @@
                     <div class="col-lg-12">
                         {{ html()->label('Target')->class('form-label')->for('redirect') }}
                         {{ html()->span('*')->class('text-danger') }}
-                        {{ html()->select('redirect', config('constants.redirect_options'))->class('form-select') }}
+                        {{ html()->select('redirect', config('constants.redirect_options'))->class('form-select choices-select') }}
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        {{ html()->select('status', config('constants.page_status_options'))->class('form-select select2') }}
+                        {{ html()->select('status', config('constants.page_status_options'))->class('form-select choices-select ') }}
                     </div>
                 </div>
                 

@@ -15,6 +15,9 @@ return [
     'menu_type_options' => [
         'single-link' => 'Custom',
         'pages' => "Page",
+        'blogs' => "Blog",
+        'services' => "Service",
+        'countries' => "Country",
     ],
 
     'menu_location_options' => [

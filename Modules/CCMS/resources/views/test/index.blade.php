@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="container-fluid">
+    <div class="container-fluid">
         <x-dashboard.breadcumb :title="$title" />
         @if ($errors->any())
             <x-flash-message type="danger" :messages="$errors->all()" />
@@ -12,9 +11,9 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title mb-0">Page List</h5>
-                        <button class="btn text-white" data-bs-toggle="modal" data-bs-target="#addPageModal" style="background-color: var(--vz-primary)"><i
-                                class="ri-add-line align-middle"></i> Create</h5>
+                        <h5 class="card-title mb-0">{{ $title }}</h5>
+                        <a href="{{ route('test.create') }}" class="btn text-white"
+                            style="background-color: var(--vz-primary)"><i class="ri-add-line align-middle"></i> Create</a>
                     </div>
                     <div class="card-body">
                         @php
@@ -27,11 +26,9 @@
                                     'searchable' => false,
                                     'sortable' => false,
                                 ],
-                                ['title' => 'Parent', 'data' => 'parent_id', 'name' => 'parent_id'],
+                                ['title' => 'Image', 'data' => 'image', 'name' => 'image'],
                                 ['title' => 'Title', 'data' => 'title', 'name' => 'title'],
                                 ['title' => 'Slug', 'data' => 'slug', 'name' => 'slug'],
-                                ['title' => 'Type', 'data' => 'type', 'name' => 'type'],
-                                ['title' => 'Published At', 'data' => 'date', 'name' => 'date'],
                                 ['title' => 'Status', 'data' => 'status', 'name' => 'status'],
                                 [
                                     'title' => 'Action',
@@ -41,12 +38,10 @@
                                 ],
                             ];
                         @endphp
-                        <x-data-table-script :route="route('page.index')" :reorder="route('page.reorder')" :columns="$columns" />
+                        <x-data-table-script :route="route('test.index')" :reorder="route('test.reorder')" :columns="$columns" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @include('ccms::page.modal.create')
-    @include('ccms::page.modal.edit')
 @endsection

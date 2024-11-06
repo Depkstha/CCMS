@@ -15,7 +15,7 @@
         <div>
             {{ html()->label('Type')->class('form-label')->for('type') }}
             {{ html()->span('*')->class('text-danger') }}
-            {{ html()->select('type', config('constants.page_type_options'))->class('form-select')->required() }}
+            {{ html()->select('type', config('constants.page_type_options'))->class('form-select choices-select')->required() }}
         </div>
     </div>
 

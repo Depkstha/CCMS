@@ -18,10 +18,12 @@ class Blog extends Model
     protected $fillable = [
         'title',
         'slug',
+        'short_description',
         'description',
         'category_id',
         'image',
         'images',
+        'banner',
         'meta_title',
         'meta_description',
         'meta_keywords',
@@ -59,10 +61,21 @@ class Blog extends Model
         );
     }
 
+    protected function banner(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => asset($value),
+        );
+    }
+
     protected function sidebarImage(): Attribute
     {
         return Attribute::make(
             get: fn($value) => asset($value),
         );
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

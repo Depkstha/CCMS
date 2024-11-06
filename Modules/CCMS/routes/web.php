@@ -16,6 +16,7 @@ use Modules\CCMS\Http\Controllers\ServiceController;
 use Modules\CCMS\Http\Controllers\SettingController;
 use Modules\CCMS\Http\Controllers\SliderController;
 use Modules\CCMS\Http\Controllers\TeamController;
+use Modules\CCMS\Http\Controllers\TestController;
 use Modules\CCMS\Http\Controllers\TestimonialController;
 
 /*
@@ -63,6 +64,9 @@ Route::group(['middleware' => ['web', 'auth'],'prefix' => 'admin/'], function ()
 
     Route::post('service/reorder', [ServiceController::class, 'reorder'])->name('service.reorder');
     Route::resource('service', ServiceController::class)->names('service');
+
+    Route::post('test/reorder', [TestController::class, 'reorder'])->name('test.reorder');
+    Route::resource('test', TestController::class)->names('test');
 
     Route::post('country/reorder', [CountryController::class, 'reorder'])->name('country.reorder');
     Route::resource('country', CountryController::class)->names('country');

@@ -36,7 +36,7 @@
                 <div class="row gy-3">
                     <div class="col-lg-6">
                         {{ html()->label('Branch')->class('form-label')->for('branch_id') }}
-                        {{ html()->select('branch_id', [])->class('form-select')->placeholder('Select') }}
+                        {{ html()->select('branch_id', [])->class('form-select choices-select')->placeholder('Select') }}
                     </div>
 
                     <div class="col-lg-6">
@@ -100,7 +100,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        {{ html()->select('status', config('constants.page_status_options'))->class('form-select select2') }}
+                        {{ html()->select('status', config('constants.page_status_options'))->class('form-select choices-select ') }}
                     </div>
                 </div>
             </div>

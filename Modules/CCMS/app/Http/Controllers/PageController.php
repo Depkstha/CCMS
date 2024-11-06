@@ -23,6 +23,9 @@ class PageController extends Controller
                 ->setRowClass('tableRow')
                 ->editColumn('type', '{!! config("constants.page_type_options")[$type] !!}')
                 ->editColumn('date', '{!! getFormatted(date:$date) ?? "N/A" !!}')
+                ->editColumn('parent_id', function (Page $page) {
+                    return $page->parent?->title ?? '-';
+                })
                 ->editColumn('status', function (Page $page) {
                     $status = $page->status ? 'Published' : 'Draft';
                     $color = $page->status ? 'text-success' : 'text-danger';

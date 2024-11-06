@@ -77,4 +77,15 @@ if (!function_exists('getFormatted')) {
             return null;
         }
     }
+
+    function getThemeColor()
+    {
+        static $themeColor;
+
+        if ($themeColor === null) {
+            $themeColor = setting('color') ?? '#F3F3F9';
+        }
+        
+        return $themeColor;
+    }
 }

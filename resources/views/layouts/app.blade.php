@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar-size="lg"
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"
     data-sidebar-image="none" data-preloader="disable">
 
 <head>
@@ -26,13 +26,18 @@
     @stack('css')
 
     <style>
-        :root {
-            --vz-primary: {{ setting('color') }};
-            --primary-theme-color: {{ setting('color') }};
-            --vz-vertical-menu-item-hover-color: {{ setting('color') }};
-            --vz-vertical-menu-item-active-color: {{ setting('color') }};
-            --vz-vertical-menu-sub-item-hover-color: {{ setting('color') }};
-            --vz-vertical-menu-sub-item-active-color: {{ setting('color') }};
+        :root[data-sidebar="dark"] {
+            --vz-primary: {{ getThemeColor() }};
+            --primary-theme-color: {{ getThemeColor() }};
+            --vz-vertical-menu-item-hover-color: {{ getThemeColor() }};
+            --vz-vertical-menu-item-active-color: {{ getThemeColor() }};
+            --vz-vertical-menu-sub-item-hover-color: {{ getThemeColor() }};
+            --vz-vertical-menu-sub-item-active-color: {{ getThemeColor() }};
+        }
+
+        .nav-border-top-primary .nav-link.active {
+            color: {{ getThemeColor() }};
+            border-top-color: {{ getThemeColor() }};
         }
     </style>
 
@@ -70,6 +75,7 @@
     <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/js/pages/form-validation.init.js') }}"></script>
+    <script src="{{ asset('assets/libs/choice.js/choices.min.js') }}"></script>
 
     @stack('js')
 

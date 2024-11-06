@@ -6,18 +6,18 @@
                     <div class="col-12">
                         {{ html()->label('Title')->class('form-label')->for('title') }}
                         {{ html()->span('*')->class('text-danger') }}
-                        {{ html()->text('title')->class('form-control')->placeholder('Enter Service Title')->required(true) }}
+                        {{ html()->text('title')->class('form-control')->placeholder('Enter Test Title')->required(true) }}
                     </div>
 
                     <div class="col-12">
                         {{ html()->label('Description (Short)')->class('form-label')->for('short_description') }}
-                        {{ html()->textarea('short_description')->class('form-control')->placeholder('Enter Service Description (Short)')->rows(5) }}
+                        {{ html()->textarea('short_description')->class('form-control')->placeholder('Enter Test Description (Short)')->rows(5) }}
                     </div>
 
                     <div class="col-12">
                         {{ html()->label('Description')->class('form-label')->for('description') }}
                         {{ html()->span('*')->class('text-danger') }}
-                        {{ html()->textarea('description')->class('form-control ckeditor-classic')->placeholder('Enter Service Description')->required() }}
+                        {{ html()->textarea('description')->class('form-control ckeditor-classic')->placeholder('Enter Test Description')->required() }}
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                 {{ html()->select('status', config('constants.page_status_options'))->class('form-select choices-select') }}
             </div>
 
-            <x-form-buttons :href="route('service.index')" :label="isset($service) ? 'Update' : 'Create'" />
+            <x-form-buttons :href="route('test.index')" :label="isset($test) ? 'Update' : 'Create'" />
 
         </div>
 
@@ -74,12 +74,12 @@
             <div class="card-body">
                 <div class="mb-3">
                     {{ html()->label('Featured')->class('form-label')->for('image') }}
-                    <x-image-input :data="$editable ? $service->getRawOriginal('image') : null" id="image" name="image" :editable="$editable"
+                    <x-image-input :data="$editable ? $test->getRawOriginal('image') : null" id="image" name="image" :editable="$editable"
                         :multiple=false />
                 </div>
 
                 {{ html()->label('Banner')->class('form-label')->for('banner') }}
-                <x-image-input :data="$editable ? $service->getRawOriginal('banner') : null" id="banner" name="banner" :editable="$editable"
+                <x-image-input :data="$editable ? $test->getRawOriginal('banner') : null" id="banner" name="banner" :editable="$editable"
                     :multiple=false />
             </div>
         </div>
@@ -91,7 +91,7 @@
                 </h6>
             </div>
             <div class="card-body">
-                <x-image-input :editable="$editable" id="images" name="images" :data="$editable ? $service->getRawOriginal('images') : null" :multiple="true"
+                <x-image-input :editable="$editable" id="images" name="images" :data="$editable ? $test->getRawOriginal('images') : null" :multiple="true"
                     label="Select Images" />
             </div>
         </div>
@@ -113,7 +113,7 @@
 
                     <div class="col-lg-12">
                         {{ html()->label('Image')->class('form-label')->for('sidebar_content') }}
-                        <x-image-input :data="$editable ? $service->getRawOriginal('sidebar_image') : null" id="sidebar_image" name="sidebar_image" :editable="$editable"
+                        <x-image-input :data="$editable ? $test->getRawOriginal('sidebar_image') : null" id="sidebar_image" name="sidebar_image" :editable="$editable"
                             :multiple=false />
                     </div>
                 </div>

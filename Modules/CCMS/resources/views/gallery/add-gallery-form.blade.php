@@ -19,16 +19,10 @@
                 {{ html()->text('slug')->value($gallery->slug ?? old('slug'))->class('form-control')->placeholder('Enter Gallery Slug') }}
             </div>
 
-
-            <div class="mb-3">
-                {{ html()->label('Category')->class('form-label')->for('category_id') }}
-                {{ html()->select('category_id', $categoryOptions)->class('form-select')->placeholder('Select') }}
-            </div>
-
             <div class="mb-3">
                 {{ html()->label('Image(s) or Video')->for('images') }}
                 <x-image-input :editable="$editable" id="images" name="images" :data="$editable ? $gallery->getRawOriginal('images') : null" :multiple="true"
-                    label="Select Images" />
+                    label="Select Image(s) or video" />
             </div>
 
             <div class="mb-3">
@@ -36,6 +30,11 @@
                 {{ html()->text('link')->value($gallery->link ?? old('link'))->class('form-control')->placeholder('Enter Youtube video link') }}
                 <div class="d-flex flex-wrap mt-1" id="video-preview">
                 </div>
+            </div>
+
+            <div class="mb-3">
+                {{ html()->label('Category')->class('form-label')->for('category_id') }}
+                {{ html()->select('category_id', $categoryOptions)->class('form-select choices-select')->placeholder('Select') }}
             </div>
 
         </div>

@@ -58,7 +58,7 @@
             </div>
             <div class="card-body">
                 {{ html()->label('Status')->class('form-label visually-hidden')->for('status') }}
-                {{ html()->select('status', config('constants.page_status_options'))->class('form-select') }}
+                {{ html()->select('status', config('constants.page_status_options'))->class('form-select choices-select') }}
             </div>
 
             <x-form-buttons :href="route('country.index')" :label="isset($country) ? 'Update' : 'Create'" />
@@ -71,10 +71,15 @@
                 </h6>
             </div>
             <div class="card-body">
-                <div>
+                <div class="mb-3">
                     {{ html()->label('Featured')->class('form-label')->for('image') }}
-                    <x-image-input :data="$editable ? $country->getRawOriginal('image') : null" id="image" name="image" :editable="$editable" :multiple=false />
+                    <x-image-input :data="$editable ? $country->getRawOriginal('image') : null" id="image" name="image" :editable="$editable"
+                        :multiple=false />
                 </div>
+
+                {{ html()->label('Banner')->class('form-label')->for('banner') }}
+                <x-image-input :data="$editable ? $country->getRawOriginal('banner') : null" id="banner" name="banner" :editable="$editable"
+                    :multiple=false />
             </div>
         </div>
 
@@ -131,7 +136,7 @@
 
                     <div class="col-lg-12">
                         {{ html()->label('Target')->class('form-label')->for('redirect') }}
-                        {{ html()->select('redirect', config('constants.redirect_options'))->class('form-select') }}
+                        {{ html()->select('redirect', config('constants.redirect_options'))->class('form-select choices-select') }}
                     </div>
                 </div>
             </div>

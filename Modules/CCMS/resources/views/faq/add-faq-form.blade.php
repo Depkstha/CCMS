@@ -21,7 +21,7 @@
 
             <div class="mb-3">
                 {{ html()->label('Category')->class('form-label')->for('category_id') }}
-                {{ html()->select('category_id', $categoryOptions)->class('form-select')->placeholder('Select') }}
+                {{ html()->select('category_id', $categoryOptions)->class('form-select choices-select')->placeholder('Select') }}
             </div>
         </div>
 

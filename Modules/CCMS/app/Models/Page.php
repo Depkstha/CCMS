@@ -20,6 +20,7 @@ class Page extends Model
         'slug',
         'section',
         'template',
+        'parent_id',
         'type',
         'banner',
         'image',
@@ -83,5 +84,15 @@ class Page extends Model
         return Attribute::make(
             get: fn($value) => asset($value),
         );
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Page::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Page::class, 'parent_id');
     }
 }

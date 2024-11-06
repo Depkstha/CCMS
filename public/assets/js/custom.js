@@ -36,4 +36,64 @@ document.querySelectorAll(".ckeditor-classic").forEach((editor) => {
     });
 });
 
+document.querySelectorAll(".choices-select").forEach((element) => {
+    const placeholderValue =
+        element.getAttribute("data-placeholder-value") || "Select";
+    const choices = new Choices(element, {
+        silent: false,
+        items: [],
+        choices: [],
+        renderChoiceLimit: -1,
+        maxItemCount: -1,
+        closeDropdownOnSelect: "auto",
+        singleModeForMultiSelect: false,
+        addChoices: false,
+        addItems: true,
+        addItemFilter: (value) => !!value && value !== "",
+        removeItems: true,
+        removeItemButton: true,
+        removeItemButtonAlignLeft: false,
+        editItems: false,
+        allowHTML: false,
+        allowHtmlUserInput: false,
+        duplicateItemsAllowed: true,
+        delimiter: ",",
+        paste: true,
+        searchEnabled: true,
+        searchChoices: true,
+        searchFloor: 1,
+        searchResultLimit: 4,
+        searchFields: ["label", "value"],
+        position: "auto",
+        resetScrollPosition: true,
+        shouldSort: true,
+        shouldSortItems: false,
+        shadowRoot: null,
+        placeholder: true,
+        placeholderValue: placeholderValue,
+        searchPlaceholderValue: "Search option...",
+        prependValue: null,
+        appendValue: null,
+        renderSelectedChoices: "auto",
+        loadingText: "Loading...",
+        noResultsText: "No results found",
+        noChoicesText: "No choices to choose from",
+        itemSelectText: "Press to select",
+        uniqueItemText: "Only unique values can be added",
+        customAddItemText:
+            "Only values matching specific conditions can be added",
+        addItemText: (value) => {
+            return `Press Enter to add <b>"${value}"</b>`;
+        },
+        removeItemIconText: () => `Remove item`,
+        removeItemLabelText: (value) => `Remove item: ${value}`,
+        maxItemText: (maxItemCount) => {
+            return `Only ${maxItemCount} values can be added`;
+        },
+        valueComparer: (value1, value2) => {
+            return value1 === value2;
+        },
+    });
+});
+
 
