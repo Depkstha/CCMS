@@ -90,6 +90,7 @@ class MenuController extends Controller
                 'title' => 'required',
                 'type' => 'required',
                 'parameter' => 'required',
+                'order' => 'required', 'integer',
             ]);
 
             $menu = $this->menu->create($validated);
@@ -222,5 +223,12 @@ class MenuController extends Controller
             }
         }
         return response(['status' => 200, 'message' => 'Reordered successfully'], 200);
+    }
+
+    public function toggle($id)
+    {
+        $menu = $this->menu->findOne($id);
+        $menu->update(['status' => !$menu->status]);
+        return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
     }
 }

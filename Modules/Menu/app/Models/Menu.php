@@ -26,6 +26,7 @@ class Menu extends Model
         'type',
         'parameter',
         'status',
+        'order',
     ];
 
     public $appends = ['location'];

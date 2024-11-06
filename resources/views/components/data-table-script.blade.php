@@ -125,6 +125,39 @@
                     }
                 });
             });
+
+            $('body').on('click', '.toggle-item', function(e) {
+                e.preventDefault();
+                let url = $(this).data('link');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Item will be marked as " + $(this).attr('data-status') + "!",
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, toggle it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: url,
+                            type: 'get',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                if (response.status == 200) {
+                                    flasher.success(response.message);
+                                    $('.ajax-datatable').DataTable().ajax.reload();
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    }
+                });
+            });
         });
     </script>
 @endpush

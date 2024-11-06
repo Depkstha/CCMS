@@ -16,6 +16,7 @@ use Modules\Menu\Http\Controllers\MenuController;
 
 Route::group(['middleware' => ['auth', 'web'], 'prefix' => 'admin/'], function () {
     Route::get('menu/getMenuTypeOptions', [MenuController::class, 'getMenuTypeOptions'])->name('menu.getMenuTypeOptions');
+    Route::get('menu/toggle/{id}', [MenuController::class, 'toggle'])->name('menu.toggle');
     Route::post('menu/reorder', [MenuController::class, 'reorder'])->name('menu.reorder');
     Route::resource('menu', MenuController::class)->names('menu');
 });
