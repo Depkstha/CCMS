@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'Homepage',
             'slug' => '/',
             'type' => 'page',
+            'template' => 'home-template',
             'status' => 1,
             'order' => 1,
         ]);

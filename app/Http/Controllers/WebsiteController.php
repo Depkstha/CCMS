@@ -26,13 +26,13 @@ class WebsiteController extends Controller
         $page = $data['page'] = self::getPageWithChildrenBySlug(parent: null, slug: '/');
         
         if (!$page) {
-            return view("client.$this->path.pages.404");
+            return view("client.$this->path.errors.404");
         }
 
         $path = "client.$this->path.pages.$page->template";
 
         if (!View::exists($path)) {
-            return view("client.$this->path.pages.404");
+            return view("client.$this->path.errors.404");
         }
 
         return view($path, $data);
@@ -52,7 +52,7 @@ class WebsiteController extends Controller
     //         })->with('institution')->first();
 
     //     if (!$course) {
-    //         return view("client.$this->path.pages.404");
+    //         return view("client.$this->path.errors.404");
     //     }
 
     //     return view("client.$this->path.pages.courses.single", $data);
@@ -69,7 +69,7 @@ class WebsiteController extends Controller
     //     $blog = $data["blog"] = Blogs::where('alias', $alias)->first();
 
     //     if (!$blog) {
-    //         return view("client.$this->path.pages.404");
+    //         return view("client.$this->path.errors.404");
     //     }
 
     //     return view("client.$this->path.pages.blogs.single", $data);
@@ -87,7 +87,7 @@ class WebsiteController extends Controller
     //     $data["recentEvents"] = Events::latest()->take(5)->get();
 
     //     if (!$event) {
-    //         return view("client.$this->path.pages.404");
+    //         return view("client.$this->path.errors.404");
     //     }
 
     //     return view("client.$this->path.pages.events.single", $data);
@@ -103,13 +103,13 @@ class WebsiteController extends Controller
         $page = self::getPageWithChildrenBySlug($parent, $slug);
 
         if (!$page) {
-            return view("client.$this->path.pages.404");
+            return view("client.$this->path.errors.404");
         }
 
         $path = "client.$this->path.pages.$page->template";
 
         if (!View::exists($path)) {
-            return view("client.$this->path.pages.404");
+            return view("client.$this->path.errors.404");
         }
 
         return view($path, $page);
@@ -117,7 +117,7 @@ class WebsiteController extends Controller
 
     public function fallback()
     {
-        // return view("client.$this->path.pages.404");
+        return view("client.$this->path.errors.404");
     }
 
     private function getPageWithChildrenBySlug(?string $parent, ?string $slug)
