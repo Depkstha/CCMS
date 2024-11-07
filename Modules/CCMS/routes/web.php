@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\CCMS\Http\Controllers\BlogController;
 use Modules\CCMS\Http\Controllers\BranchController;
 use Modules\CCMS\Http\Controllers\CategoryController;
+use Modules\CCMS\Http\Controllers\CounterController;
 use Modules\CCMS\Http\Controllers\CountryController;
 use Modules\CCMS\Http\Controllers\FaqCategoryController;
 use Modules\CCMS\Http\Controllers\FaqController;
@@ -64,6 +65,11 @@ Route::group(['middleware' => ['web', 'auth'],'prefix' => 'admin/'], function ()
     Route::get('partner/toggle/{id}', [PartnerController::class, 'toggle'])->name('partner.toggle');
     Route::get('partner/{id?}', [PartnerController::class, 'index'])->name('partner.index');
     Route::resource('partner', PartnerController::class)->names('partner')->only(['store', 'edit', 'destroy']);
+
+    Route::post('counter/reorder', [CounterController::class, 'reorder'])->name('counter.reorder');
+    Route::get('counter/toggle/{id}', [CounterController::class, 'toggle'])->name('counter.toggle');
+    Route::get('counter/{id?}', [CounterController::class, 'index'])->name('counter.index');
+    Route::resource('counter', CounterController::class)->names('counter')->only(['store', 'edit', 'destroy']);
 
     Route::post('blog/reorder', [BlogController::class, 'reorder'])->name('blog.reorder');
     Route::get('blog/toggle/{id}', [BlogController::class, 'toggle'])->name('blog.toggle');

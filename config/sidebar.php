@@ -44,6 +44,14 @@ return [
     ],
 
     [
+        'text' => 'Counter',
+        'url' => 'admin/counter',
+        'icon' => 'ri-add-circle-line',
+        'module' => 'CCMS',
+        // 'can' => ['setting.index'],
+    ],
+
+    [
         'text' => 'Page',
         'url' => 'admin/page',
         'icon' => 'ri-pages-line',
@@ -122,6 +130,12 @@ return [
             [
                 'url' => 'admin/institution',
                 'text' => 'Representative Institution',
+                // 'can' => ['user.index'],
+            ],
+
+            [
+                'url' => 'admin/test',
+                'text' => 'Proficiency Test',
                 // 'can' => ['user.index'],
             ],
         ],
