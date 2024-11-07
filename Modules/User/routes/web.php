@@ -19,3 +19,6 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin/'], function (
     Route::get('user/{id?}', [UserController::class, 'index'])->name('user.index');
     Route::resource('user', UserController::class)->names('user')->only(['store', 'edit', 'destroy']);
 });
+
+require __DIR__ . '/client.php';
+

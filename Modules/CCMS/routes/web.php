@@ -116,3 +116,5 @@ Route::group(['middleware' => ['web', 'auth'],'prefix' => 'admin/'], function ()
     Route::get('institution/toggle/{id}', [InstitutionController::class, 'toggle'])->name('institution.toggle');
     Route::resource('institution', InstitutionController::class)->names('institution')->only(['store', 'edit', 'destroy']);
 });
+
+

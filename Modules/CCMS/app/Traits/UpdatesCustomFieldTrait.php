@@ -13,9 +13,8 @@ trait UpdatesCustomFieldTrait
 
     public function processCustomFields($request)
     {
-        $data = [];
-
-        if (!isEmptyArray($request->key)) {
+        $data = null;
+        if (!is_null($request->key) && !isEmptyArray($request->key)) {
             foreach ($request->key as $index => $value) {
                 $data[] = [
                     'icon' => $request->icon[$index] ?? null,

@@ -2,12 +2,13 @@
 
 namespace Modules\CCMS\Models;
 
+use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class GalleryCategory extends Model
 {
-    use HasFactory;
+    use HasFactory, CreatedUpdatedBy;
 
     /**
      * The attributes that are mass assignable.

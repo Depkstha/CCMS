@@ -168,8 +168,8 @@ class PageController extends Controller
 
     public function toggle($id)
     {
-        $menu = Page::findOrFail($id);
-        $menu->update(['status' => !$menu->status]);
+        $page = Page::findOrFail($id);
+        $page->update(['status' => !$page->status]);
         return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
     }
 }

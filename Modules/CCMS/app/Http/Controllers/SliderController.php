@@ -177,8 +177,8 @@ class SliderController extends Controller
 
     public function toggle($id)
     {
-        $menu = Slider::findOrFail($id);
-        $menu->update(['status' => !$menu->status]);
+        $slider = Slider::findOrFail($id);
+        $slider->update(['status' => !$slider->status]);
         return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
     }
 }

@@ -177,8 +177,8 @@ class PopupController extends Controller
 
     public function toggle($id)
     {
-        $menu = Popup::findOrFail($id);
-        $menu->update(['status' => !$menu->status]);
+        $popup = Popup::findOrFail($id);
+        $popup->update(['status' => !$popup->status]);
         return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
     }
 }

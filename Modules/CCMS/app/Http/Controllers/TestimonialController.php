@@ -177,8 +177,8 @@ class TestimonialController extends Controller
 
     public function toggle($id)
     {
-        $menu = Testimonial::findOrFail($id);
-        $menu->update(['status' => !$menu->status]);
+        $testimonial = Testimonial::findOrFail($id);
+        $testimonial->update(['status' => !$testimonial->status]);
         return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
     }
 }

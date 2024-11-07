@@ -2,6 +2,7 @@
 
 namespace Modules\CCMS\Models;
 
+use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +11,7 @@ use Modules\CCMS\Traits\UpdatesCustomFieldTrait;
 
 class Test extends Model
 {
-    use HasFactory, UpdatesCustomFieldTrait;
+    use HasFactory, UpdatesCustomFieldTrait, CreatedUpdatedBy;
 
     /**
      * The attributes that are mass assignable.

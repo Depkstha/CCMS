@@ -148,8 +148,8 @@ class FaqCategoryController extends Controller
 
     public function toggle($id)
     {
-        $faq = Faq::findOrFail($id);
-        $faq->update(['status' => !$faq->status]);
+        $faqCategory = FaqCategory::findOrFail($id);
+        $faqCategory->update(['status' => !$faqCategory->status]);
         return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
     }
 }

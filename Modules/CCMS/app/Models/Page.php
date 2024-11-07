@@ -2,6 +2,7 @@
 
 namespace Modules\CCMS\Models;
 
+use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Modules\CCMS\Traits\UpdatesCustomFieldTrait;
 
 class Page extends Model
 {
-    use HasFactory, UpdatesCustomFieldTrait;
+    use HasFactory, UpdatesCustomFieldTrait, CreatedUpdatedBy;
 
     /**
      * The attributes that are mass assignable.
@@ -44,6 +45,9 @@ class Page extends Model
         'date',
         'status',
         'order',
+
+        'created_by',
+        'updated_by',
     ];
 
     protected function casts(): array
@@ -96,6 +100,6 @@ class Page extends Model
 
     public function children()
     {
-        return $this->hasMany(Page::class, 'parent_id');
+        return $this->hasMany(Page::class, 'parent_id')->where('type', 'widget');
     }
 }

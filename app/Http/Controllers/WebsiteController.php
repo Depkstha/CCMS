@@ -2,20 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Articles;
-use App\Models\Blogs;
-use App\Models\Courses;
-use App\Models\Events;
-use App\Models\Institutions;
-use App\Models\Sliders;
-use App\Models\Teams;
-use App\Models\Universities;
-use App\Rules\Recaptcha;
-use CCMS;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Client\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Modules\CCMS\Models\Page;
 
 class WebsiteController extends Controller
 {
@@ -25,20 +13,30 @@ class WebsiteController extends Controller
         $this->path = config('app.client');
     }
 
-    // public function home()
-    // {
-    //     $data['slider'] = Sliders::first();
-    //     $data['message'] = Articles::where('alias', 'message-from-president')->first();
-    //     $data['why_choose_us'] = Articles::where('alias', 'why-choose-us')->first();
-    //     $data['institutions'] = Institutions::orderBy('display_order', 'asc')->select('title', 'logo', 'alias')->get();
-    //     $data['events'] = Events::latest()->take(3)->select('title', 'alias', 'location', 'startdate', 'enddate', 'thumb')->get();
-    //     $data['committees'] = Teams::orderBy('display_order', 'asc')->take(4)->get();
-    //     $data['universities'] = Universities::orderBy('display_order', 'asc')->select('title', 'logo')->get();
+    public function home()
+    {
+        // $data['slider'] = Sliders::first();
+        // $data['message'] = Articles::where('alias', 'message-from-president')->first();
+        // $data['why_choose_us'] = Articles::where('alias', 'why-choose-us')->first();
+        // $data['institutions'] = Institutions::orderBy('display_order', 'asc')->select('title', 'logo', 'alias')->get();
+        // $data['events'] = Events::latest()->take(3)->select('title', 'alias', 'location', 'startdate', 'enddate', 'thumb')->get();
+        // $data['committees'] = Teams::orderBy('display_order', 'asc')->take(4)->get();
+        // $data['universities'] = Universities::orderBy('display_order', 'asc')->select('title', 'logo')->get();
 
-    //     return view("client.$this->path.pages.home", $data);
-    // }
+        $page = $data['page'] = self::getPageWithChildrenBySlug(parent: null, slug: '/');
+        
+        if (!$page) {
+            return view("client.$this->path.pages.404");
+        }
 
-   
+        $path = "client.$this->path.pages.$page->template";
+
+        if (!View::exists($path)) {
+            return view("client.$this->path.pages.404");
+        }
+
+        return view($path, $data);
+    }
 
     // public function courseList()
     // {
@@ -95,41 +93,43 @@ class WebsiteController extends Controller
     //     return view("client.$this->path.pages.events.single", $data);
     // }
 
-    public function loadPage($parent, $slug)
+    public function loadPage(?string $parent = null, ?string $slug = null)
     {
-        dd($page);
-        $data = [];
+        if ($slug === null) {
+            $slug = $parent;
+            $parent = null;
+        }
 
-        // switch ($page) {
+        $page = self::getPageWithChildrenBySlug($parent, $slug);
 
-        //     case 'team':
-        //         $data['teams'] = Teams::orderBy('display_order', 'asc')->get();
-        //         $data['page'] = Articles::where('alias', $page)->first();
+        if (!$page) {
+            return view("client.$this->path.pages.404");
+        }
 
-        //         break;
+        $path = "client.$this->path.pages.$page->template";
 
-        //     case 'company-profile':
-        //         $data['committees'] = Teams::orderBy('display_order', 'asc')->take(4)->get();
-        //         $data['universities'] = Universities::orderBy('display_order', 'asc')->select('title', 'logo')->get();
-        //         $data['page'] = Articles::where('alias', $page)->with('children')->first();
+        if (!View::exists($path)) {
+            return view("client.$this->path.pages.404");
+        }
 
-        //         break;
-
-        //     default:
-        //         $data['page'] = Articles::where('alias', $page)->first();
-        // }
-
-        // $path = "client.$this->path.pages.$page";
-
-        // if (!View::exists($path)) {
-        //     return view("client.$this->path.pages.404");
-        // }
-
-        // return view($path, $data);
+        return view($path, $page);
     }
 
     public function fallback()
     {
         // return view("client.$this->path.pages.404");
+    }
+
+    private function getPageWithChildrenBySlug(?string $parent, ?string $slug)
+    {
+        $page = Page::where([
+            'status' => 1,
+            'type' => 'page',
+            'slug' => $slug,
+        ])->when($parent, function ($query) use ($parent) {
+            $query->where('parent', $parent);
+        })->with('children')->first();
+
+        return $page;
     }
 }

@@ -2,13 +2,14 @@
 
 namespace Modules\CCMS\Models;
 
+use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Slider extends Model
 {
-    use HasFactory;
+    use HasFactory, CreatedUpdatedBy;
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +27,9 @@ class Slider extends Model
         
         'status',
         'order',
+
+        'created_by',
+        'updated_by',
     ];
 
     protected function images(): Attribute
