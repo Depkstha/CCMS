@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('title');
             $table->text('slug')->nullable();
             $table->longText('description')->nullable();
+            $table->json('custom')->nullable();
 
             $table->json('section')->nullable();
             $table->string('banner')->nullable();

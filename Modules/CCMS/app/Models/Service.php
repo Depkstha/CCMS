@@ -5,10 +5,11 @@ namespace Modules\CCMS\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\CCMS\Traits\UpdatesCustomFieldTrait;
 
 class Service extends Model
 {
-    use HasFactory;
+    use HasFactory, UpdatesCustomFieldTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -18,8 +19,10 @@ class Service extends Model
         'slug',
         'short_description',
         'description',
+        'parent_id',
         'image',
         'images',
+        'custom',
         'banner',
         'meta_title',
         'meta_description',
@@ -35,6 +38,13 @@ class Service extends Model
         'updatedby',
         'order',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'custom' => 'array',
+        ];
+    }
 
     protected function images(): Attribute
     {

@@ -23,6 +23,8 @@
             </div>
         </div>
 
+        <x-ccms::custom-form-field :data="$service->custom ?? []" />
+
         <div class="card meta-section">
             <div class="card-header">
                 <h6 class="card-title mb-0 fs-14">Meta</h6>
@@ -38,7 +40,6 @@
                         {{ html()->textarea('meta_keywords')->class('form-control mb-3')->placeholder('Meta Keywords') }}
                     </div>
 
-
                     <div class="col-xl-12 col-sm-12">
                         {{ html()->label('Meta Description')->class('form-label')->for('meta_description') }}
                         {{ html()->textarea('meta_description')->class('form-control mb-3')->placeholder('Meta Description')->rows(3) }}
@@ -46,7 +47,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="col-xl-4">
@@ -62,7 +62,6 @@
             </div>
 
             <x-form-buttons :href="route('service.index')" :label="isset($service) ? 'Update' : 'Create'" />
-
         </div>
 
         <div class="card featured-image-section">
@@ -74,13 +73,11 @@
             <div class="card-body">
                 <div class="mb-3">
                     {{ html()->label('Featured')->class('form-label')->for('image') }}
-                    <x-image-input :data="$editable ? $service->getRawOriginal('image') : null" id="image" name="image" :editable="$editable"
-                        :multiple=false />
+                    <x-image-input :data="$editable ? $service->getRawOriginal('image') : null" id="image" name="image" :editable="$editable" :multiple=false />
                 </div>
 
                 {{ html()->label('Banner')->class('form-label')->for('banner') }}
-                <x-image-input :data="$editable ? $service->getRawOriginal('banner') : null" id="banner" name="banner" :editable="$editable"
-                    :multiple=false />
+                <x-image-input :data="$editable ? $service->getRawOriginal('banner') : null" id="banner" name="banner" :editable="$editable" :multiple=false />
             </div>
         </div>
 
@@ -143,4 +140,5 @@
             </div>
         </div>
     </div>
+
 </div>

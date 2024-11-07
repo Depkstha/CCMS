@@ -23,6 +23,8 @@
             </div>
         </div>
 
+        <x-ccms::custom-form-field :data="$test->custom ?? []" />
+
         <div class="card meta-section">
             <div class="card-header">
                 <h6 class="card-title mb-0 fs-14">Meta</h6>

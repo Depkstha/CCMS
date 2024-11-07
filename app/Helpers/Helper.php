@@ -85,7 +85,12 @@ if (!function_exists('getFormatted')) {
         if ($themeColor === null) {
             $themeColor = setting('color') ?? '#F3F3F9';
         }
-        
+
         return $themeColor;
+    }
+
+    function isEmptyArray($array = [])
+    {
+        return is_array($array) && array_filter($array) === [];
     }
 }

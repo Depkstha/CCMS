@@ -5,12 +5,13 @@ namespace Modules\CCMS\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\CCMS\Traits\UpdatesCustomFieldTrait;
 
 // use Modules\CCMS\Database\Factories\PageFactory;
 
 class Page extends Model
 {
-    use HasFactory;
+    use HasFactory, UpdatesCustomFieldTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +26,7 @@ class Page extends Model
         'banner',
         'image',
         'images',
+        'custom',
         'published_at',
 
         'sidebar_title',
@@ -48,6 +50,7 @@ class Page extends Model
     {
         return [
             'section' => 'array',
+            'custom' => 'array',
         ];
     }
 

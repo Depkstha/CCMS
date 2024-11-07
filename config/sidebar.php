@@ -119,7 +119,7 @@ return [
 
     [
         'text' => 'Study Abroad',
-        'icon' => ' ri-earth-line',
+        'icon' => 'ri-earth-line',
         'module' => 'CCMS',
         'submenu' => [
             [

@@ -57,40 +57,9 @@
                             </div>
                         @endif
 
-                        {{-- <div class="filter cm-content-box box-primary">
-                        <div class="content-title SlideToolHeader">
-                            <div class="cpa">
-                                Custom Fields
-                            </div>
-                            <div class="tools">
-                                <a href="javascript:void(0);" class="expand handle"><i
-                                        class="fal fa-angle-down"></i></a>
-                            </div>
-                        </div>
-                        <div class="cm-content-body">
-                            <div class="card-body">
-                                <h6 class="mb-4 font-w500">Add New Custom Field:</h6>
-                                <div class="row">
-                                    <div class="col-xl-6 col-sm-6">
-                                        <form>
-                                            <div class="mb-3">
-                                                <label class="form-label">Title</label>
-                                                <input type="text" class="form-control" placeholder="Title">
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-xl-6 col-sm-6">
-                                        <label class="form-label">Value</label>
-                                        <textarea class="form-control" rows="2"></textarea>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-primary btn-sm mt-3 mt-sm-0">Add Custom
-                                    Field</button>
-                                <p class="mt-3 mb-0">Custom fields can be used to extra metadata to a post
-                                    that you can use in your theme.</p>
-                            </div>
-                        </div>
-                        </div> --}}
+                        @if (in_array('custom-field-section', $page->section))
+                            <x-ccms::custom-field-section :data="$page->custom ?? []" />
+                        @endif
 
                         @if (in_array('meta-section', $page->section))
                             <div class="card meta-section">

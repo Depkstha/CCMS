@@ -5,10 +5,11 @@ namespace Modules\CCMS\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\CCMS\Traits\UpdatesCustomFieldTrait;
 
 class Country extends Model
 {
-    use HasFactory;
+    use HasFactory, UpdatesCustomFieldTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +21,7 @@ class Country extends Model
         'description',
         'image',
         'images',
+        'custom',
         'banner',
         'meta_title',
         'meta_description',

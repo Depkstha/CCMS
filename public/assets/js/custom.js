@@ -37,8 +37,7 @@ document.querySelectorAll(".ckeditor-classic").forEach((editor) => {
 });
 
 document.querySelectorAll(".choices-select").forEach((element) => {
-    const placeholderValue =
-        element.getAttribute("data-placeholder-value") || "Select";
+    const placeholderValue = element.getAttribute("placeholder");
     const choices = new Choices(element, {
         silent: false,
         items: [],
@@ -69,7 +68,7 @@ document.querySelectorAll(".choices-select").forEach((element) => {
         shouldSort: true,
         shouldSortItems: false,
         shadowRoot: null,
-        placeholder: true,
+        placeholder: placeholderValue ? true : false,
         placeholderValue: placeholderValue,
         searchPlaceholderValue: "Search option...",
         prependValue: null,
@@ -96,4 +95,17 @@ document.querySelectorAll(".choices-select").forEach((element) => {
     });
 });
 
+$(".clone-container").on("click", ".clone", function () {
+    const $clone = $(this).closest(".clone-section").clone(true);
+    $clone.find("label").remove();
+    $clone.find('input[type="text"]').val("");
+    $clone.find("textarea").val("");
+    $clone.appendTo(".clone-container");
+});
 
+$(".clone-container").on("click", ".declone", function () {
+    let count = $(".clone-container").find(".clone-section").length;
+    if (count > 1) {
+        $(this).closest(".clone-section").remove();
+    }
+});

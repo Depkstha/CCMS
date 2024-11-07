@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('slug')->nullable();
             $table->text('short_description')->nullable();
             $table->longText('description')->nullable();
+            $table->json('custom')->nullable();
+            $table->integer('parent_id')->unsigned()->nullable();
 
             $table->string('image')->nullable();
             $table->string('banner')->nullable();
