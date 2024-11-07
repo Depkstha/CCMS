@@ -33,7 +33,7 @@ class Page extends Model
 
         'button_text',
         'button_url',
-        'redirect',
+        'button_target',
 
         'meta_title',
         'meta_keywords',

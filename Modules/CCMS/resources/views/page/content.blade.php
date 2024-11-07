@@ -244,9 +244,9 @@
                                         </div>
 
                                         <div class="col-lg-12">
-                                            {{ html()->label('Target')->class('form-label')->for('redirect') }}
+                                            {{ html()->label('Target')->class('form-label')->for('button_target') }}
                                             {{ html()->span('*')->class('text-danger') }}
-                                            {{ html()->select('redirect', config('constants.redirect_options'))->class('form-select choices-select')->required() }}
+                                            {{ html()->select('button_target', config('constants.redirect_options'))->class('form-select choices-select')->required() }}
                                         </div>
                                     </div>
                                 </div>

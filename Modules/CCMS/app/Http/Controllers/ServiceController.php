@@ -132,4 +132,11 @@ class ServiceController extends Controller
         }
         return response(['status' => true, 'message' => 'Reordered successfully'], 200);
     }
+
+    public function toggle($id)
+    {
+        $service = Service::findOrFail($id);
+        $service->update(['status' => !$service->status]);
+        return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
+    }
 }

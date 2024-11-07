@@ -174,4 +174,11 @@ class TeamController extends Controller
         }
         return response(['status' => 200, 'message' => 'Reordered successfully'], 200);
     }
+
+    public function toggle($id)
+    {
+        $team = Team::findOrFail($id);
+        $team->update(['status' => !$team->status]);
+        return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
+    }
 }

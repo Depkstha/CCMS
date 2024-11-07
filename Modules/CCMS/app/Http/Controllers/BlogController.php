@@ -138,4 +138,11 @@ class BlogController extends Controller
         }
         return response(['status' => true, 'message' => 'Reordered successfully'], 200);
     }
+
+    public function toggle($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->update(['status' => !$blog->status]);
+        return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
+    }
 }

@@ -133,4 +133,11 @@ class BranchController extends Controller
         }
         return response(['status' => true, 'message' => 'Reordered successfully'], 200);
     }
+
+    public function toggle($id)
+    {
+        $branch = Branch::findOrFail($id);
+        $branch->update(['status' => !$branch->status]);
+        return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
+    }
 }

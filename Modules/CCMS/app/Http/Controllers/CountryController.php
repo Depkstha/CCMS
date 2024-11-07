@@ -132,4 +132,11 @@ class CountryController extends Controller
         }
         return response(['status' => true, 'message' => 'Reordered successfully'], 200);
     }
+
+    public function toggle($id)
+    {
+        $country = Country::findOrFail($id);
+        $country->update(['status' => !$country->status]);
+        return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
+    }
 }

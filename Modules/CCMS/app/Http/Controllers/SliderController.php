@@ -174,4 +174,11 @@ class SliderController extends Controller
         }
         return response(['status' => 200, 'message' => 'Reordered successfully'], 200);
     }
+
+    public function toggle($id)
+    {
+        $menu = Slider::findOrFail($id);
+        $menu->update(['status' => !$menu->status]);
+        return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
+    }
 }

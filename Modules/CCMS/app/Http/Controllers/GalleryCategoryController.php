@@ -145,4 +145,11 @@ class GalleryCategoryController extends Controller
         }
         return response(['status' => true, 'message' => 'Reordered successfully'], 200);
     }
+
+    public function toggle($id)
+    {
+        $galleryCategory = GalleryCategory::findOrFail($id);
+        $galleryCategory->update(['status' => !$galleryCategory->status]);
+        return response(['status' => 200, 'message' => 'Toggled successfully'], 200);
+    }
 }
